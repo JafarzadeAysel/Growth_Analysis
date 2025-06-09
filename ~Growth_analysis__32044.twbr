@@ -539,6 +539,20 @@ ORDER BY date_paid DESC]]></relation>
         </objects>
       </object-graph>
     </datasource>
+    <datasource caption='growth_data' inline='true' name='federated.0kj74xr0g166dz1bzyqo21q4qomy' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='localhost' name='mysql.0n8n9oo0e4hz0d10veqk213a4lp9'>
+            <connection class='mysql' dbname='growth_data' odbc-native-protocol='' one-time-sql='' port='3306' server='localhost' source-charset='' username='root' />
+          </named-connection>
+        </named-connections>
+      </connection>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <object-graph />
+    </datasource>
   </datasources>
   <worksheets>
     <worksheet name='Free'>
@@ -826,6 +840,7 @@ ORDER BY date_paid DESC]]></relation>
           <style-rule element='axis'>
             <encoding attr='space' class='0' field='[federated.0qfa7gr1qgg4in1h5my6q077vebu].[Multiple Values]' field-type='quantitative' fold='true' scope='rows' synchronized='true' type='space' />
             <format attr='display' class='0' field='[federated.0qfa7gr1qgg4in1h5my6q077vebu].[Multiple Values]' scope='rows' value='false' />
+            <format attr='title' class='0' field='[federated.0qfa7gr1qgg4in1h5my6q077vebu].[sum:Calculation_2254896057490583558:qk]' scope='rows' value='New paid' />
           </style-rule>
           <style-rule element='cell'>
             <format attr='text-format' field='[federated.0qfa7gr1qgg4in1h5my6q077vebu].[sum:count_converted_paid:qk]' value='n#,##0;-#,##0' />
@@ -945,7 +960,7 @@ ORDER BY date_paid DESC]]></relation>
       <simple-id uuid='{EDBC9ADC-FDB2-4F5A-8632-FD2A7EF1E384}' />
     </worksheet>
   </worksheets>
-  <windows saved-dpi-scale-factor='1.25' source-height='63'>
+  <windows saved-dpi-scale-factor='1.25' source-height='89'>
     <window class='worksheet' name='Free'>
       <cards>
         <edge name='left'>
