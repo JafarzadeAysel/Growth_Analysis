@@ -1,3 +1,6 @@
+SET GLOBAL sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO'; 
+SET SESSION sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO'; 
+
 WITH
 free_users as
 (
@@ -35,11 +38,11 @@ count_converted as
     GROUP BY date
 )
 SELECT
-	f.date as date_registered "Date Registered",
+	f.date  "Date Registered",
     f.count_total_free "Count Total Free",
-    IFNULL(c.count_converted, 0) as count_converted "Count Converted"
+    IFNULL(c.count_converted, 0)   "Count Converted"
 FROM
 	count_free as f
     LEFT JOIN
     count_converted as c ON f.date = c.date
-ORDER BY date_registered DESC;
+ORDER BY f.date DESC
