@@ -539,19 +539,223 @@ ORDER BY date_paid DESC]]></relation>
         </objects>
       </object-graph>
     </datasource>
-    <datasource caption='growth_data' inline='true' name='federated.0kj74xr0g166dz1bzyqo21q4qomy' version='18.1'>
+    <datasource caption='waterfall(last30)' inline='true' name='federated.0kj74xr0g166dz1bzyqo21q4qomy' version='18.1'>
       <connection class='federated'>
         <named-connections>
           <named-connection caption='localhost' name='mysql.0n8n9oo0e4hz0d10veqk213a4lp9'>
             <connection class='mysql' dbname='growth_data' odbc-native-protocol='' one-time-sql='' port='3306' server='localhost' source-charset='' username='root' />
           </named-connection>
         </named-connections>
+        <relation connection='mysql.0n8n9oo0e4hz0d10veqk213a4lp9' name='Custom SQL Query' type='text'>select * from waterfall_last_30_days</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>user_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[user_id]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>user_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_59E219B9C63D4C4CBD2BE80E4542002D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>current_status</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[current_status]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>current_status</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_59E219B9C63D4C4CBD2BE80E4542002D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>plan</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[plan]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>plan</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_59E219B9C63D4C4CBD2BE80E4542002D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tag</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[tag]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>tag</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_59E219B9C63D4C4CBD2BE80E4542002D]</object-id>
+          </metadata-record>
+        </metadata-records>
       </connection>
+      <aliases enabled='yes' />
+      <column caption='Tag Corrected' datatype='integer' name='[Calculation_2254896057695039496]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF  [tag] =&apos;Churned&apos;&#13;&#10;THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+      </column>
+      <column caption='Negative Tag Corrected' datatype='integer' name='[Calculation_2254896058058981385]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='-sum([Calculation_2254896057695039496])' />
+      </column>
+      <column caption='Custom SQL Query' datatype='table' name='[__tableau_internal_object_id__].[_59E219B9C63D4C4CBD2BE80E4542002D]' role='measure' type='quantitative' />
       <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
       </semantic-values>
-      <object-graph />
+      <object-graph>
+        <objects>
+          <object caption='Custom SQL Query' id='_59E219B9C63D4C4CBD2BE80E4542002D'>
+            <properties context=''>
+              <relation connection='mysql.0n8n9oo0e4hz0d10veqk213a4lp9' name='Custom SQL Query' type='text'>select * from waterfall_last_30_days</relation>
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+    <datasource caption='waterfall(last90)' inline='true' name='federated.0ja7cio0ari5ez1gs3il60e4wwj1' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='localhost' name='mysql.00ykbho1lid9vq1b77vy51fhiqm2'>
+            <connection class='mysql' dbname='growth_data' odbc-native-protocol='' one-time-sql='' port='3306' server='localhost' source-charset='' username='root' />
+          </named-connection>
+        </named-connections>
+        <relation connection='mysql.00ykbho1lid9vq1b77vy51fhiqm2' name='Custom SQL Query' type='text'>select * from waterfall_last_90_days</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>user_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[user_id]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>user_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_515AD31E5E3D41DFA976A110C0544BE8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>current_status</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[current_status]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>current_status</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_515AD31E5E3D41DFA976A110C0544BE8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>plan</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[plan]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>plan</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_515AD31E5E3D41DFA976A110C0544BE8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tag</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[tag]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>tag</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_515AD31E5E3D41DFA976A110C0544BE8]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Tag corrected' datatype='integer' name='[Calculation_2254896058190475274]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [tag] =&apos;Churned&apos;&#13;&#10;THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+      </column>
+      <column caption='Negative count' datatype='integer' name='[Calculation_2254896058190712843]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='-SUM([Calculation_2254896058190475274])' />
+      </column>
+      <column caption='Custom SQL Query' datatype='table' name='[__tableau_internal_object_id__].[_515AD31E5E3D41DFA976A110C0544BE8]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='Custom SQL Query' id='_515AD31E5E3D41DFA976A110C0544BE8'>
+            <properties context=''>
+              <relation connection='mysql.00ykbho1lid9vq1b77vy51fhiqm2' name='Custom SQL Query' type='text'>select * from waterfall_last_90_days</relation>
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
     </datasource>
   </datasources>
   <worksheets>
@@ -959,8 +1163,294 @@ ORDER BY date_paid DESC]]></relation>
       </table>
       <simple-id uuid='{EDBC9ADC-FDB2-4F5A-8632-FD2A7EF1E384}' />
     </worksheet>
+    <worksheet name='waterfall(last30)'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Subscriptions&apos;s Growth (last 30 days)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='waterfall(last30)' name='federated.0kj74xr0g166dz1bzyqo21q4qomy' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0kj74xr0g166dz1bzyqo21q4qomy'>
+            <column caption='Tag Corrected' datatype='integer' name='[Calculation_2254896057695039496]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF  [tag] =&apos;Churned&apos;&#13;&#10;THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+            </column>
+            <column caption='Negative Tag Corrected' datatype='integer' name='[Calculation_2254896058058981385]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='-sum([Calculation_2254896057695039496])' />
+            </column>
+            <column-instance column='[Calculation_2254896057695039496]' derivation='Sum' name='[cum:sum:Calculation_2254896057695039496:qk]' pivot='key' type='quantitative'>
+              <table-calc aggregation='Sum' ordering-type='Rows' type='CumTotal' />
+            </column-instance>
+            <column-instance column='[plan]' derivation='None' name='[none:plan:nk]' pivot='key' type='nominal' />
+            <column-instance column='[tag]' derivation='None' name='[none:tag:nk]' pivot='key' type='nominal' />
+            <column datatype='string' name='[plan]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896057695039496]' derivation='Sum' name='[sum:Calculation_2254896057695039496:qk]' pivot='key' type='quantitative' />
+            <column datatype='string' name='[tag]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896058058981385]' derivation='User' name='[usr:Calculation_2254896058058981385:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:plan:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:plan:nk]' member='&quot;Annual&quot;' />
+              <groupfilter function='member' level='[none:plan:nk]' member='&quot;Monthly&quot;' />
+              <groupfilter function='member' level='[none:plan:nk]' member='&quot;Quarterly&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:tag:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;Base&quot;</bucket>
+              <bucket>&quot;New&quot;</bucket>
+              <bucket>&quot;Churned&quot;</bucket>
+              <bucket>&quot;Resurrected&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:plan:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[cum:sum:Calculation_2254896057695039496:qk]' scope='rows' value='Subscriptions' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[usr:Calculation_2254896058058981385:qk]' include-totals='true' num-steps='2' reverse='true' type='custom-interpolated'>
+              <color-palette custom='true' name='' type='ordered-diverging'>
+                <color>#ff5050</color>
+                <color>#fb5e5e</color>
+                <color>#f86c6c</color>
+                <color>#f47a7a</color>
+                <color>#f18787</color>
+                <color>#ed9494</color>
+                <color>#eaa1a1</color>
+                <color>#e6adad</color>
+                <color>#e3b8b8</color>
+                <color>#dfc3c3</color>
+                <color>#dccece</color>
+                <color>#d9d9d9</color>
+                <color>#ccd6d7</color>
+                <color>#bfd4d5</color>
+                <color>#b3d1d4</color>
+                <color>#a6cfd2</color>
+                <color>#9acdd0</color>
+                <color>#8fcacf</color>
+                <color>#83c8cd</color>
+                <color>#77c5cb</color>
+                <color>#6cc3ca</color>
+                <color>#61c1c8</color>
+                <color>#56bfc7</color>
+              </color-palette>
+            </encoding>
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-width' data-class='total' value='0' />
+            <format attr='border-style' data-class='total' value='none' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:plan:nk]' value='Plan' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='GanttBar' />
+            <encodings>
+              <color column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[usr:Calculation_2254896058058981385:qk]' />
+              <size column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[usr:Calculation_2254896058058981385:qk]' />
+              <tooltip column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[sum:Calculation_2254896057695039496:qk]' />
+              <text column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[sum:Calculation_2254896057695039496:qk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#757575'>Tag:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:tag:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#757575'>Count:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0kj74xr0g166dz1bzyqo21q4qomy].[sum:Calculation_2254896057695039496:qk]>]]></run>
+                <run>Æ&#10;&#10;</run>
+                <run fontcolor='#757575'>Running Total:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0kj74xr0g166dz1bzyqo21q4qomy].[cum:sum:Calculation_2254896057695039496:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0kj74xr0g166dz1bzyqo21q4qomy].[cum:sum:Calculation_2254896057695039496:qk]</rows>
+        <cols total='true'>[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:tag:nk]</cols>
+      </table>
+      <simple-id uuid='{2685A5F3-3431-4AEF-9826-3D63FB87359C}' />
+    </worksheet>
+    <worksheet name='waterfall(last365)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='waterfall(last90)' name='federated.0ja7cio0ari5ez1gs3il60e4wwj1' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0ja7cio0ari5ez1gs3il60e4wwj1'>
+            <column-instance column='[tag]' derivation='None' name='[none:tag:nk]' pivot='key' type='nominal' />
+            <column datatype='string' name='[tag]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:tag:nk]</cols>
+      </table>
+      <simple-id uuid='{CA366402-F58C-47E1-B8C2-8717C855B778}' />
+    </worksheet>
+    <worksheet name='waterfall(last90)'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Subscriptions&apos;s Growth (last 90 days)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='waterfall(last90)' name='federated.0ja7cio0ari5ez1gs3il60e4wwj1' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0ja7cio0ari5ez1gs3il60e4wwj1'>
+            <column caption='Tag corrected' datatype='integer' name='[Calculation_2254896058190475274]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [tag] =&apos;Churned&apos;&#13;&#10;THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+            </column>
+            <column caption='Negative count' datatype='integer' name='[Calculation_2254896058190712843]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='-SUM([Calculation_2254896058190475274])' />
+            </column>
+            <column-instance column='[Calculation_2254896058190475274]' derivation='Sum' name='[cum:sum:Calculation_2254896058190475274:qk]' pivot='key' type='quantitative'>
+              <table-calc aggregation='Sum' ordering-type='Rows' type='CumTotal' />
+            </column-instance>
+            <column-instance column='[plan]' derivation='None' name='[none:plan:nk]' pivot='key' type='nominal' />
+            <column-instance column='[tag]' derivation='None' name='[none:tag:nk]' pivot='key' type='nominal' />
+            <column datatype='string' name='[plan]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896058190475274]' derivation='Sum' name='[sum:Calculation_2254896058190475274:qk]' pivot='key' type='quantitative' />
+            <column datatype='string' name='[tag]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896058190712843]' derivation='User' name='[usr:Calculation_2254896058190712843:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:plan:nk]'>
+            <groupfilter function='level-members' level='[none:plan:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <manual-sort column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:tag:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;Base&quot;</bucket>
+              <bucket>&quot;New&quot;</bucket>
+              <bucket>&quot;Churned&quot;</bucket>
+              <bucket>&quot;Resurrected&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:plan:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[cum:sum:Calculation_2254896058190475274:qk]' scope='rows' value='Subscriptions' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='border-width' data-class='total' scope='rows' value='0' />
+            <format attr='border-style' data-class='total' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' include-totals='true' num-steps='2' type='custom-interpolated'>
+              <color-palette custom='true' name='' type='ordered-diverging'>
+                <color>#ff5050</color>
+                <color>#fb5e5e</color>
+                <color>#f86c6c</color>
+                <color>#f47a7a</color>
+                <color>#f18787</color>
+                <color>#ed9494</color>
+                <color>#eaa1a1</color>
+                <color>#e6adad</color>
+                <color>#e3b8b8</color>
+                <color>#dfc3c3</color>
+                <color>#dccece</color>
+                <color>#d9d9d9</color>
+                <color>#ccd6d7</color>
+                <color>#bfd4d5</color>
+                <color>#b3d1d4</color>
+                <color>#a6cfd2</color>
+                <color>#9acdd0</color>
+                <color>#8fcacf</color>
+                <color>#83c8cd</color>
+                <color>#77c5cb</color>
+                <color>#6cc3ca</color>
+                <color>#61c1c8</color>
+                <color>#56bfc7</color>
+              </color-palette>
+            </encoding>
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-width' data-class='total' value='0' />
+            <format attr='border-style' data-class='total' value='none' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='GanttBar' />
+            <encodings>
+              <color column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' />
+              <size column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[usr:Calculation_2254896058190712843:qk]' />
+              <tooltip column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' />
+              <text column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#757575'>Tag:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:tag:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#757575'>Count:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]>]]></run>
+                <run>Æ&#10;&#10;</run>
+                <run fontcolor='#757575'>Running Total:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[cum:sum:Calculation_2254896058190475274:qk]>]]></run>
+                <run>Æ&#10;</run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[cum:sum:Calculation_2254896058190475274:qk]</rows>
+        <cols total='true'>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:tag:nk]</cols>
+      </table>
+      <simple-id uuid='{C66D9A60-8C5E-4438-88FA-9A4019649B4C}' />
+    </worksheet>
   </worksheets>
-  <windows saved-dpi-scale-factor='1.25' source-height='89'>
+  <windows saved-dpi-scale-factor='1.25' source-height='115'>
     <window class='worksheet' name='Free'>
       <cards>
         <edge name='left'>
@@ -996,7 +1486,7 @@ ORDER BY date_paid DESC]]></relation>
       </viewpoint>
       <simple-id uuid='{C89A389A-9C75-45AD-8840-80EE99D92E9D}' />
     </window>
-    <window class='worksheet' maximized='true' name='Paid'>
+    <window class='worksheet' name='Paid'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1031,6 +1521,95 @@ ORDER BY date_paid DESC]]></relation>
         <zoom type='entire-view' />
       </viewpoint>
       <simple-id uuid='{139E5C5E-AFD1-4957-8ADF-DFD0AB5B5A36}' />
+    </window>
+    <window class='worksheet' name='waterfall(last30)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:plan:nk]' type='filter' />
+            <card pane-specification-id='0' param='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[usr:Calculation_2254896058058981385:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{3F35365A-96FA-4625-B550-7296EC0CE3C6}' />
+    </window>
+    <window class='worksheet' name='waterfall(last90)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:plan:nk]' type='filter' />
+            <card pane-specification-id='0' param='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{CD5346B9-EF34-489D-B7A9-C2B6087F9E3D}' />
+    </window>
+    <window class='worksheet' maximized='true' name='waterfall(last365)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{BBD19FB0-116E-4FB9-8BD7-AA01C1F6AE0C}' />
     </window>
   </windows>
 </workbook>
