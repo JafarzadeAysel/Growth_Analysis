@@ -7,10 +7,12 @@
     <CustomReferenceLineTooltips />
     <MarkAnimation />
     <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
     <ObjectModelTableType />
     <SchemaViewerObjectModel />
     <SheetIdentifierTracking />
     <SortTagCleanup />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
     <WindowsPersistSimpleIdentifiers />
   </document-format-change-manifest>
   <preferences>
@@ -45,6 +47,10 @@
           <member value='&quot;Both charts&quot;' />
           <member value='&quot;No chart label&quot;' />
         </members>
+      </column>
+      <column caption='Top N Channels' datatype='integer' name='[Parameter 5]' param-domain-type='range' role='measure' type='quantitative' value='10'>
+        <calculation class='tableau' formula='10' />
+        <range granularity='1' max='300' min='1' />
       </column>
     </datasource>
     <datasource caption='free_and_conversions' inline='true' name='federated.0vigmyx1b29otz10flsx408xxmms' version='18.1'>
@@ -757,6 +763,547 @@ ORDER BY date_paid DESC]]></relation>
         </objects>
       </object-graph>
     </datasource>
+    <datasource caption='waterfall(last 365 days)' inline='true' name='federated.0l3t8bn0kav63s18ikez51j5utmz' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='localhost' name='mysql.12lnuck1r1egrd1e0h6fn1ux0egm'>
+            <connection class='mysql' dbname='growth_data' odbc-native-protocol='' one-time-sql='' port='3306' server='localhost' source-charset='' username='root' />
+          </named-connection>
+        </named-connections>
+        <relation connection='mysql.12lnuck1r1egrd1e0h6fn1ux0egm' name='Custom SQL Query' type='text'>select * from waterfall_last_365_days</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>user_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[user_id]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>user_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_A277178C15F343B6827FC710EF1623B1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>current_status</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[current_status]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>current_status</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_A277178C15F343B6827FC710EF1623B1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>plan</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[plan]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>plan</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_A277178C15F343B6827FC710EF1623B1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tag</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[tag]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>tag</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_A277178C15F343B6827FC710EF1623B1]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Tag corrected' datatype='integer' name='[Calculation_2254896058394476556]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [tag]  = &apos;Churned&apos; THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+      </column>
+      <column caption='Negative count' datatype='integer' name='[Calculation_2254896058394697741]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='-SUM([Calculation_2254896058394476556])' />
+      </column>
+      <column caption='Custom SQL Query' datatype='table' name='[__tableau_internal_object_id__].[_A277178C15F343B6827FC710EF1623B1]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='Custom SQL Query' id='_A277178C15F343B6827FC710EF1623B1'>
+            <properties context=''>
+              <relation connection='mysql.12lnuck1r1egrd1e0h6fn1ux0egm' name='Custom SQL Query' type='text'>select * from waterfall_last_365_days</relation>
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+    <datasource caption='visitors weekly' inline='true' name='federated.1d62gqk1t6dw0p1gkscpn1ge67y0' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='localhost' name='mysql.147iutx14pb3oa13pf7sf1hsjc2m'>
+            <connection class='mysql' dbname='growth_data' odbc-native-protocol='' one-time-sql='' port='3306' server='localhost' source-charset='' username='root' />
+          </named-connection>
+        </named-connections>
+        <relation connection='mysql.147iutx14pb3oa13pf7sf1hsjc2m' name='Custom SQL Query' type='text'>WITH&#13;
+visitors as&#13;
+(&#13;
+	SELECT&#13;
+        s.session_date,&#13;
+		s.visitor_id,&#13;
+		IFNULL(s.utm_source, &quot;Organic&quot;) as channel,&#13;
+		CASE&#13;
+			WHEN DATE_FORMAT(s.session_date, &quot;%x-W%v&quot;) = DATE_FORMAT(v.first_visit_date, &quot;%x-W%v&quot;) &#13;
+				AND (i.date_registered IS NULL OR i.date_registered &gt;&gt; v.first_visit_date) THEN &quot;new&quot;&#13;
+			ELSE &quot;returning&quot;&#13;
+		END as status,&#13;
+        DATE_FORMAT(s.session_date, &quot;%x-W%v&quot;) as date_bracket&#13;
+	FROM&#13;
+		front_sessions as s&#13;
+		LEFT JOIN&#13;
+		front_visitors as v ON s.visitor_id = v.visitor_id&#13;
+        LEFT JOIN&#13;
+        student_info as i ON i.user_id = v.user_id&#13;
+	WHERE s.session_date &gt;&gt;= &apos;2022-07-01&apos;&#13;
+	GROUP BY visitor_id, date_bracket&#13;
+)&#13;
+SELECT&#13;
+	session_date,&#13;
+    channel,&#13;
+    status,&#13;
+    COUNT(*) as count_visitors&#13;
+FROM visitors&#13;
+GROUP BY session_date, channel, status&#13;
+ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>session_date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[session_date]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>session_date</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_DATE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_DATE&quot;</attribute>
+            </attributes>
+            <object-id>[_CE7BF20688BD4A5980F315B703933C2A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>channel</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[channel]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>channel</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>1048560</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+            <object-id>[_CE7BF20688BD4A5980F315B703933C2A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>status</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[status]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>status</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>9</width>
+            <contains-null>false</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_CE7BF20688BD4A5980F315B703933C2A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>count_visitors</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[count_visitors]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>count_visitors</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
+            </attributes>
+            <object-id>[_CE7BF20688BD4A5980F315B703933C2A]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Custom SQL Query' datatype='table' name='[__tableau_internal_object_id__].[_CE7BF20688BD4A5980F315B703933C2A]' role='measure' type='quantitative' />
+      <column datatype='string' name='[channel]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[count_visitors]' role='measure' type='quantitative' />
+      <column datatype='string' name='[status]' role='dimension' type='nominal' />
+      <column-instance column='[status]' derivation='None' name='[none:status:nk]' pivot='key' type='nominal' />
+      <group caption='channel Set' name='[channel Set]' name-style='unqualified' user:ui-builder='filter-group'>
+        <groupfilter count='[Parameters].[Parameter 5]' end='top' function='end' units='records' user:ui-marker='end' user:ui-top-by-field='true'>
+          <groupfilter direction='DESC' expression='SUM([count_visitors])' function='order' user:ui-marker='order'>
+            <groupfilter function='level-members' level='[channel]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </groupfilter>
+        </groupfilter>
+      </group>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:status:nk]' type='palette'>
+            <map to='#545c69'>
+              <bucket>&quot;returning&quot;</bucket>
+            </map>
+            <map to='#56bfc7'>
+              <bucket>&quot;new&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Top N Channels' datatype='integer' name='[Parameter 5]' param-domain-type='range' role='measure' type='quantitative' value='10'>
+          <calculation class='tableau' formula='10' />
+          <range granularity='1' max='300' min='1' />
+        </column>
+      </datasource-dependencies>
+      <object-graph>
+        <objects>
+          <object caption='Custom SQL Query' id='_CE7BF20688BD4A5980F315B703933C2A'>
+            <properties context=''>
+              <relation connection='mysql.147iutx14pb3oa13pf7sf1hsjc2m' name='Custom SQL Query' type='text'>WITH&#13;
+visitors as&#13;
+(&#13;
+	SELECT&#13;
+        s.session_date,&#13;
+		s.visitor_id,&#13;
+		IFNULL(s.utm_source, &quot;Organic&quot;) as channel,&#13;
+		CASE&#13;
+			WHEN DATE_FORMAT(s.session_date, &quot;%x-W%v&quot;) = DATE_FORMAT(v.first_visit_date, &quot;%x-W%v&quot;) &#13;
+				AND (i.date_registered IS NULL OR i.date_registered &gt;&gt; v.first_visit_date) THEN &quot;new&quot;&#13;
+			ELSE &quot;returning&quot;&#13;
+		END as status,&#13;
+        DATE_FORMAT(s.session_date, &quot;%x-W%v&quot;) as date_bracket&#13;
+	FROM&#13;
+		front_sessions as s&#13;
+		LEFT JOIN&#13;
+		front_visitors as v ON s.visitor_id = v.visitor_id&#13;
+        LEFT JOIN&#13;
+        student_info as i ON i.user_id = v.user_id&#13;
+	WHERE s.session_date &gt;&gt;= &apos;2022-07-01&apos;&#13;
+	GROUP BY visitor_id, date_bracket&#13;
+)&#13;
+SELECT&#13;
+	session_date,&#13;
+    channel,&#13;
+    status,&#13;
+    COUNT(*) as count_visitors&#13;
+FROM visitors&#13;
+GROUP BY session_date, channel, status&#13;
+ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+    <datasource caption='monthly_visitors' inline='true' name='federated.1e7nejn12ev2321foag0e0fqg89b' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='localhost' name='mysql.0v6r4w30s9knul194bq3e07yn0ku'>
+            <connection class='mysql' dbname='growth_data' odbc-native-protocol='' one-time-sql='' port='3306' server='localhost' source-charset='' username='root' />
+          </named-connection>
+        </named-connections>
+        <relation connection='mysql.0v6r4w30s9knul194bq3e07yn0ku' name='Custom SQL Query' type='text'>WITH&#13;
+visitors as&#13;
+(&#13;
+	SELECT&#13;
+        s.session_date,&#13;
+		s.visitor_id,&#13;
+		IFNULL(s.utm_source, &quot;Organic&quot;) as channel,&#13;
+		CASE&#13;
+			WHEN DATE_FORMAT(s.session_date, &quot;%Y-%m&quot;) = DATE_FORMAT(v.first_visit_date, &quot;%Y-%m&quot;) &#13;
+				AND (i.date_registered IS NULL OR i.date_registered &gt;&gt; v.first_visit_date) THEN &quot;new&quot;&#13;
+			ELSE &quot;returning&quot;&#13;
+		END as status,&#13;
+        DATE_FORMAT(s.session_date, &quot;%Y-%m&quot;) as date_bracket&#13;
+	FROM&#13;
+		front_sessions as s&#13;
+		LEFT JOIN&#13;
+		front_visitors as v ON s.visitor_id = v.visitor_id&#13;
+        LEFT JOIN&#13;
+        student_info as i ON i.user_id = v.user_id&#13;
+	WHERE s.session_date &gt;&gt;= &apos;2022-07-01&apos;&#13;
+	GROUP BY visitor_id, date_bracket&#13;
+)&#13;
+SELECT&#13;
+	session_date,&#13;
+    channel,&#13;
+    status,&#13;
+    COUNT(*) as count_visitors&#13;
+FROM visitors&#13;
+GROUP BY session_date, channel, status&#13;
+ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>session_date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[session_date]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>session_date</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_DATE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_DATE&quot;</attribute>
+            </attributes>
+            <object-id>[_B7821BC0438C4482B5A81E236ABCAB9E]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>channel</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[channel]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>channel</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>1048560</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+            <object-id>[_B7821BC0438C4482B5A81E236ABCAB9E]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>status</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[status]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>status</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>9</width>
+            <contains-null>false</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_B7821BC0438C4482B5A81E236ABCAB9E]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>count_visitors</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[count_visitors]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>count_visitors</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
+            </attributes>
+            <object-id>[_B7821BC0438C4482B5A81E236ABCAB9E]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Custom SQL Query' datatype='table' name='[__tableau_internal_object_id__].[_B7821BC0438C4482B5A81E236ABCAB9E]' role='measure' type='quantitative' />
+      <column datatype='string' name='[channel]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[count_visitors]' role='measure' type='quantitative' />
+      <column datatype='string' name='[status]' role='dimension' type='nominal' />
+      <column-instance column='[status]' derivation='None' name='[none:status:nk]' pivot='key' type='nominal' />
+      <group caption='channel Set' name='[channel Set]' name-style='unqualified' user:ui-builder='filter-group'>
+        <groupfilter count='[Parameters].[Parameter 5]' end='top' function='end' units='records' user:ui-marker='end' user:ui-top-by-field='true'>
+          <groupfilter direction='DESC' expression='SUM([count_visitors])' function='order' user:ui-marker='order'>
+            <groupfilter function='level-members' level='[channel]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </groupfilter>
+        </groupfilter>
+      </group>
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='C:/Users/User/Documents/My Tableau Repository/Datasources/monthly_visitors.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>session_date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[session_date]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>session_date</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>123</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>channel</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[channel]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>channel</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>170</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='3' name='LROOT_S1' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>status</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[status]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>status</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='3' name='LROOT_S1' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>count_visitors</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[count_visitors]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>count_visitors</remote-alias>
+              <ordinal>3</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>273</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:status:nk]' type='palette'>
+            <map to='#545c69'>
+              <bucket>&quot;returning&quot;</bucket>
+            </map>
+            <map to='#56bfc7'>
+              <bucket>&quot;new&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Top N Channels' datatype='integer' name='[Parameter 5]' param-domain-type='range' role='measure' type='quantitative' value='10'>
+          <calculation class='tableau' formula='10' />
+          <range granularity='1' max='300' min='1' />
+        </column>
+      </datasource-dependencies>
+      <object-graph>
+        <objects>
+          <object caption='Custom SQL Query' id='_B7821BC0438C4482B5A81E236ABCAB9E'>
+            <properties context=''>
+              <relation connection='mysql.0v6r4w30s9knul194bq3e07yn0ku' name='Custom SQL Query' type='text'>WITH&#13;
+visitors as&#13;
+(&#13;
+	SELECT&#13;
+        s.session_date,&#13;
+		s.visitor_id,&#13;
+		IFNULL(s.utm_source, &quot;Organic&quot;) as channel,&#13;
+		CASE&#13;
+			WHEN DATE_FORMAT(s.session_date, &quot;%Y-%m&quot;) = DATE_FORMAT(v.first_visit_date, &quot;%Y-%m&quot;) &#13;
+				AND (i.date_registered IS NULL OR i.date_registered &gt;&gt; v.first_visit_date) THEN &quot;new&quot;&#13;
+			ELSE &quot;returning&quot;&#13;
+		END as status,&#13;
+        DATE_FORMAT(s.session_date, &quot;%Y-%m&quot;) as date_bracket&#13;
+	FROM&#13;
+		front_sessions as s&#13;
+		LEFT JOIN&#13;
+		front_visitors as v ON s.visitor_id = v.visitor_id&#13;
+        LEFT JOIN&#13;
+        student_info as i ON i.user_id = v.user_id&#13;
+	WHERE s.session_date &gt;&gt;= &apos;2022-07-01&apos;&#13;
+	GROUP BY visitor_id, date_bracket&#13;
+)&#13;
+SELECT&#13;
+	session_date,&#13;
+    channel,&#13;
+    status,&#13;
+    COUNT(*) as count_visitors&#13;
+FROM visitors&#13;
+GROUP BY session_date, channel, status&#13;
+ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
   </datasources>
   <worksheets>
     <worksheet name='Free'>
@@ -1163,6 +1710,307 @@ ORDER BY date_paid DESC]]></relation>
       </table>
       <simple-id uuid='{EDBC9ADC-FDB2-4F5A-8632-FD2A7EF1E384}' />
     </worksheet>
+    <worksheet name='monthly_visitors'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Website Visitors (Monthly)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='monthly_visitors' name='federated.1e7nejn12ev2321foag0e0fqg89b' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Top N Channels' datatype='integer' name='[Parameter 5]' param-domain-type='range' role='measure' type='quantitative' value='10'>
+              <calculation class='tableau' formula='10' />
+              <range granularity='1' max='300' min='1' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.1e7nejn12ev2321foag0e0fqg89b'>
+            <column datatype='string' name='[channel]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[count_visitors]' role='measure' type='quantitative' />
+            <column-instance column='[channel]' derivation='None' name='[none:channel:nk]' pivot='key' type='nominal' />
+            <column-instance column='[session_date]' derivation='None' name='[none:session_date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[status]' derivation='None' name='[none:status:nk]' pivot='key' type='nominal' />
+            <column datatype='date' name='[session_date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[status]' role='dimension' type='nominal' />
+            <column-instance column='[count_visitors]' derivation='Sum' name='[sum:count_visitors:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[session_date]' derivation='Month-Trunc' name='[tmn:session_date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1e7nejn12ev2321foag0e0fqg89b].[channel Set]' />
+          <filter class='categorical' column='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:channel:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;+12722001337Coupon Return&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Abdul&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;adgoal GmbH&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;aDqCFYfU&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;aDqCFYfUUeSb&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ahmed Mohamedâ€Š&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;AlexTheAnalyst&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Anand Yadav&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Anastasiia Kotsiubynska&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Andrew Treadway&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Any Instructor&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Asem Jundi&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ATM.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;BBV&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;be level&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;BenefitHub, Inc&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;bestcourses.io&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Bhavin Toliya&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Bhylu&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Bing Rebates by Microsoft&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Brandreward  Coupons&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;bti-social-media&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;BZ&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;career_guide&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;chanin&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Chinmay Academy&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Clever Technologies LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;CodesWodes&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ColorMango.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Coopanz&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Cornellius Yudha Wijaya&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Coupon Reals&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;COUPON2DEAL LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Couponnxt&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;couponpa&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;CouponsLab&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;CouponzGuru&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Coupoonz&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_advanced_stats&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_cluster_analysis&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_confidence&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_descriptive&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_webscraping&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Coursenator&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;coursereport&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;csp-social-media&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Daily Reviews&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Danish Ahmed Khan&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Danish Hussain&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Data Science Society&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;data-science-interview-questions-pdf&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;data-science-job-report-2020-pdf&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;DataAnalyst.news&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;datamodelling.org&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;datascienceboom&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;datasciencepr.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;DataScientist.today&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;DealAm.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;dealschief.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Dealwisher.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Demand.io&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Dev Media FZCO&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;devCount&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;digidip GmbH&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Digital Splendid OPC Private Limited&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Digmycart Ltd&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;DiscountReactor&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;download-career-guide&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Dr. D. M. Hardy&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Dresspromo&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ds-booklet&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ebgb-fdvfadf-vagfeivfj-dhffgvbaf-cea&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;eDealinfo USA Inc.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;email-sendgrid&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Emmanuel Kuebutornye&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Etienne Noumen&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Extrabux&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;facebook&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;facebook.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Giles McMullen-Klein&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Greenwood MonkeyBars LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Gregory Hogg&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Grundit LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;guru99&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;hellotinah&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Home Delivery&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Honey Science Corporation.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Hoopla Doopla, Inc.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;htonetwork&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;i[â€¦]=2022 start for free&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Ibotta Inc&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;IBTimes Aff&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Igor Sharshakov&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;influencer&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-campaign-career-guide&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-campaign-tofu&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-newsletter&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-pop-up&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-sitewide&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;instagram&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;James Asher&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Karma Shopping&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;kdnuggets&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;kdnuggets.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Kellar&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ketan raval&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;KING RETAILERZ LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;kjeeone&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;LearnData.today&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Lending Partners&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;link-building&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Linkbux&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;linkedin&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Liquid Traffic&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Love Savings Group&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Machine Learning&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Mark Ways&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Max Rebates&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Mazitsol, LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;medium&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Meer&apos;s World&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Melhem&apos;s affiliate&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;MK INFOTECH PTE LTD&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Mohammad Shoaib&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;mopubiâ€Š&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;MTN PRESS&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Muchila Holdings Ltd.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Muhammad Usama&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;myWorld 360 AG&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;nakarta&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;NetrockDeals&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;nichedata&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Noble House Group Belgium&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;offcampusjobs4u.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Olivier Maugain&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Online Courseing&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Organic&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;phuongcala&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;pinterest&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;PluralSight&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;plus.google.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;pocket_mylist&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;pointersrl&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;pro4max&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Prodege, LLC - CouponCause.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Promosinn&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;quora&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;reddit&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;REE SOLUTIONS INC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Refermate LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;reputation roi inc&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;reviewsint&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Revounts&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;rs&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;saashub&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;SAP Target&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;sciencefunn&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;seederlist&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;sendgrid.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Sharkcoupons&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;shibazaki&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Shifty@123&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;siwei chen&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;smart search tech&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;smart.reviews&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Smarttfix&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;social&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Social Good App&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Sovrn Commerce&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Spring+Sale&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Sudipta Mondal&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Summer+Sale&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;techzoon&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;The Ravit Show&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;tiktok&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;trustpilot&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;trustradius.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;twitter&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;twitter.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ultimate-career-guide-pdf&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;vaahfvbafbag&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Verified Promo Code&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Very Important Relationships Inc.  (VIR)&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Victory Tale&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Vinod Vishwakarma Digital India&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;webinar&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Website&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Webtech Solutions&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Wickfire&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Wildfire Systems&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;WinningPC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;womaneng&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;www.ritecoupons.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;www.yourwisedeal.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;YieldKit GmbH&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;youtube&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ytb&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;YUNIKARN LTD&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;yvaxfeva&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;zalo&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='quantitative' column='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:session_date:qk]' context='true' included-values='in-range'>
+            <min>#2022-07-01#</min>
+            <max>#2022-10-31#</max>
+          </filter>
+          <filter class='categorical' column='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:status:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:status:nk]' member='&quot;new&quot;' />
+              <groupfilter function='member' level='[none:status:nk]' member='&quot;returning&quot;' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.1e7nejn12ev2321foag0e0fqg89b].[none:session_date:qk]</column>
+            <column>[federated.1e7nejn12ev2321foag0e0fqg89b].[none:channel:nk]</column>
+            <column>[federated.1e7nejn12ev2321foag0e0fqg89b].[channel Set]</column>
+            <column>[federated.1e7nejn12ev2321foag0e0fqg89b].[none:status:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.1e7nejn12ev2321foag0e0fqg89b].[sum:count_visitors:qk]' scope='rows' value='Number of Visitors' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:status:nk]' value='Visitors'>
+              <formatted-text>
+                <run>Visitors</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:status:nk]' value='Status'>
+              <formatted-text>
+                <run>Status</run>
+              </formatted-text>
+            </format>
+            <format attr='title' field='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:channel:nk]' value='Channel (First Click)'>
+              <formatted-text>
+                <run>Channel (First Click)</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:status:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1e7nejn12ev2321foag0e0fqg89b].[sum:count_visitors:qk]</rows>
+        <cols>[federated.1e7nejn12ev2321foag0e0fqg89b].[tmn:session_date:ok]</cols>
+      </table>
+      <simple-id uuid='{6B12EEC0-3054-45BB-8C52-BE64CC153F16}' />
+    </worksheet>
     <worksheet name='waterfall(last30)'>
       <layout-options>
         <title>
@@ -1295,28 +2143,114 @@ ORDER BY date_paid DESC]]></relation>
       <simple-id uuid='{2685A5F3-3431-4AEF-9826-3D63FB87359C}' />
     </worksheet>
     <worksheet name='waterfall(last365)'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Subscriptions&apos;s Growth (last 365 days)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <table>
         <view>
           <datasources>
-            <datasource caption='waterfall(last90)' name='federated.0ja7cio0ari5ez1gs3il60e4wwj1' />
+            <datasource caption='waterfall(last 365 days)' name='federated.0l3t8bn0kav63s18ikez51j5utmz' />
           </datasources>
-          <datasource-dependencies datasource='federated.0ja7cio0ari5ez1gs3il60e4wwj1'>
+          <datasource-dependencies datasource='federated.0l3t8bn0kav63s18ikez51j5utmz'>
+            <column caption='Tag corrected' datatype='integer' name='[Calculation_2254896058394476556]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [tag]  = &apos;Churned&apos; THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+            </column>
+            <column caption='Negative count' datatype='integer' name='[Calculation_2254896058394697741]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='-SUM([Calculation_2254896058394476556])' />
+            </column>
+            <column-instance column='[Calculation_2254896058394476556]' derivation='Sum' name='[cum:sum:Calculation_2254896058394476556:qk]' pivot='key' type='quantitative'>
+              <table-calc aggregation='Sum' ordering-type='Rows' type='CumTotal' />
+            </column-instance>
+            <column-instance column='[plan]' derivation='None' name='[none:plan:nk]' pivot='key' type='nominal' />
             <column-instance column='[tag]' derivation='None' name='[none:tag:nk]' pivot='key' type='nominal' />
+            <column datatype='string' name='[plan]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896058394476556]' derivation='Sum' name='[sum:Calculation_2254896058394476556:qk]' pivot='key' type='quantitative' />
             <column datatype='string' name='[tag]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896058394697741]' derivation='User' name='[usr:Calculation_2254896058394697741:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.0l3t8bn0kav63s18ikez51j5utmz].[none:plan:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:plan:nk]' member='&quot;Annual&quot;' />
+              <groupfilter function='member' level='[none:plan:nk]' member='&quot;Monthly&quot;' />
+              <groupfilter function='member' level='[none:plan:nk]' member='&quot;Quarterly&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0l3t8bn0kav63s18ikez51j5utmz].[none:tag:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;Base&quot;</bucket>
+              <bucket>&quot;New&quot;</bucket>
+              <bucket>&quot;Churned&quot;</bucket>
+              <bucket>&quot;Resurrected&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.0l3t8bn0kav63s18ikez51j5utmz].[none:plan:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
-        <style />
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0l3t8bn0kav63s18ikez51j5utmz].[cum:sum:Calculation_2254896058394476556:qk]' scope='rows' value='Subscriptions' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.0l3t8bn0kav63s18ikez51j5utmz].[sum:Calculation_2254896058394476556:qk]' include-totals='true' num-steps='2' type='custom-interpolated'>
+              <color-palette custom='true' name='' type='ordered-diverging'>
+                <color>#ff5050</color>
+                <color>#fb5e5e</color>
+                <color>#f86c6c</color>
+                <color>#f47a7a</color>
+                <color>#f18787</color>
+                <color>#ed9494</color>
+                <color>#eaa1a1</color>
+                <color>#e6adad</color>
+                <color>#e3b8b8</color>
+                <color>#dfc3c3</color>
+                <color>#dccece</color>
+                <color>#d9d9d9</color>
+                <color>#ccd6d7</color>
+                <color>#bfd4d5</color>
+                <color>#b3d1d4</color>
+                <color>#a6cfd2</color>
+                <color>#9acdd0</color>
+                <color>#8fcacf</color>
+                <color>#83c8cd</color>
+                <color>#77c5cb</color>
+                <color>#6cc3ca</color>
+                <color>#61c1c8</color>
+                <color>#56bfc7</color>
+              </color-palette>
+            </encoding>
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-width' data-class='total' value='0' />
+            <format attr='border-style' data-class='total' value='none' />
+          </style-rule>
+        </style>
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Automatic' />
+            <mark class='GanttBar' />
+            <encodings>
+              <color column='[federated.0l3t8bn0kav63s18ikez51j5utmz].[sum:Calculation_2254896058394476556:qk]' />
+              <size column='[federated.0l3t8bn0kav63s18ikez51j5utmz].[usr:Calculation_2254896058394697741:qk]' />
+              <text column='[federated.0l3t8bn0kav63s18ikez51j5utmz].[sum:Calculation_2254896058394476556:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
           </pane>
         </panes>
-        <rows />
-        <cols>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:tag:nk]</cols>
+        <rows>[federated.0l3t8bn0kav63s18ikez51j5utmz].[cum:sum:Calculation_2254896058394476556:qk]</rows>
+        <cols total='true'>[federated.0l3t8bn0kav63s18ikez51j5utmz].[none:tag:nk]</cols>
       </table>
       <simple-id uuid='{CA366402-F58C-47E1-B8C2-8717C855B778}' />
     </worksheet>
@@ -1449,8 +2383,94 @@ ORDER BY date_paid DESC]]></relation>
       </table>
       <simple-id uuid='{C66D9A60-8C5E-4438-88FA-9A4019649B4C}' />
     </worksheet>
+    <worksheet name='weekly_visitors'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Website Visitors (Monthly)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='visitors weekly' name='federated.1d62gqk1t6dw0p1gkscpn1ge67y0' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Top N Channels' datatype='integer' name='[Parameter 5]' param-domain-type='range' role='measure' type='quantitative' value='10'>
+              <calculation class='tableau' formula='10' />
+              <range granularity='1' max='300' min='1' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.1d62gqk1t6dw0p1gkscpn1ge67y0'>
+            <column datatype='string' name='[channel]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[count_visitors]' role='measure' type='quantitative' />
+            <column-instance column='[channel]' derivation='None' name='[none:channel:nk]' pivot='key' type='nominal' />
+            <column-instance column='[session_date]' derivation='None' name='[none:session_date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[status]' derivation='None' name='[none:status:nk]' pivot='key' type='nominal' />
+            <column datatype='date' name='[session_date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[status]' role='dimension' type='nominal' />
+            <column-instance column='[count_visitors]' derivation='Sum' name='[sum:count_visitors:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[session_date]' derivation='Week-Trunc' name='[twk:session_date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[channel Set]' />
+          <filter class='categorical' column='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:channel:nk]'>
+            <groupfilter function='level-members' level='[none:channel:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:session_date:qk]' context='true' included-values='in-range'>
+            <min>#2022-07-01#</min>
+            <max>#2022-10-31#</max>
+          </filter>
+          <filter class='categorical' column='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:status:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:status:nk]' member='&quot;new&quot;' />
+              <groupfilter function='member' level='[none:status:nk]' member='&quot;returning&quot;' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:session_date:qk]</column>
+            <column>[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:channel:nk]</column>
+            <column>[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:status:nk]</column>
+            <column>[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[channel Set]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[sum:count_visitors:qk]' scope='rows' value='Number of Visitors' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:status:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-orientation' value='-90' />
+              </style-rule>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[sum:count_visitors:qk]</rows>
+        <cols>[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[twk:session_date:ok]</cols>
+      </table>
+      <simple-id uuid='{7C22CC6F-B034-4AB9-B2BB-E89ECAD4D72D}' />
+    </worksheet>
   </worksheets>
-  <windows saved-dpi-scale-factor='1.25' source-height='115'>
+  <windows saved-dpi-scale-factor='1.25' source-height='193'>
     <window class='worksheet' name='Free'>
       <cards>
         <edge name='left'>
@@ -1588,7 +2608,7 @@ ORDER BY date_paid DESC]]></relation>
       </viewpoint>
       <simple-id uuid='{CD5346B9-EF34-489D-B7A9-C2B6087F9E3D}' />
     </window>
-    <window class='worksheet' maximized='true' name='waterfall(last365)'>
+    <window class='worksheet' name='waterfall(last365)'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1608,8 +2628,88 @@ ORDER BY date_paid DESC]]></relation>
             <card type='title' />
           </strip>
         </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0l3t8bn0kav63s18ikez51j5utmz].[none:plan:nk]' type='filter' />
+            <card pane-specification-id='0' param='[federated.0l3t8bn0kav63s18ikez51j5utmz].[sum:Calculation_2254896058394476556:qk]' type='color' />
+          </strip>
+        </edge>
       </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
       <simple-id uuid='{BBD19FB0-116E-4FB9-8BD7-AA01C1F6AE0C}' />
+    </window>
+    <window class='worksheet' name='weekly_visitors'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:session_date:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card mode='checkdropdown' param='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:channel:nk]' type='filter' values='context' />
+            <card param='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:status:nk]' show-all='false' type='filter' />
+            <card pane-specification-id='0' param='[federated.1d62gqk1t6dw0p1gkscpn1ge67y0].[none:status:nk]' type='color' />
+            <card mode='type_in' param='[Parameters].[Parameter 5]' type='parameter' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{05050CE1-CC69-4ED0-BC31-7947F581B1DD}' />
+    </window>
+    <window class='worksheet' maximized='true' name='monthly_visitors'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:status:nk]' show-all='false' type='filter' />
+            <card param='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:session_date:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card mode='checkdropdown' param='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:channel:nk]' type='filter' values='context' />
+            <card pane-specification-id='0' param='[federated.1e7nejn12ev2321foag0e0fqg89b].[none:status:nk]' type='color' />
+            <card mode='type_in' param='[Parameters].[Parameter 5]' type='parameter' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{ED6410AA-8C7A-44AB-8256-193D10A4F487}' />
     </window>
   </windows>
 </workbook>

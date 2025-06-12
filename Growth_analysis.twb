@@ -539,6 +539,224 @@ ORDER BY date_paid DESC]]></relation>
         </objects>
       </object-graph>
     </datasource>
+    <datasource caption='waterfall(last30)' inline='true' name='federated.0kj74xr0g166dz1bzyqo21q4qomy' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='localhost' name='mysql.0n8n9oo0e4hz0d10veqk213a4lp9'>
+            <connection class='mysql' dbname='growth_data' odbc-native-protocol='' one-time-sql='' port='3306' server='localhost' source-charset='' username='root' />
+          </named-connection>
+        </named-connections>
+        <relation connection='mysql.0n8n9oo0e4hz0d10veqk213a4lp9' name='Custom SQL Query' type='text'>select * from waterfall_last_30_days</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>user_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[user_id]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>user_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_59E219B9C63D4C4CBD2BE80E4542002D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>current_status</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[current_status]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>current_status</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_59E219B9C63D4C4CBD2BE80E4542002D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>plan</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[plan]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>plan</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_59E219B9C63D4C4CBD2BE80E4542002D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tag</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[tag]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>tag</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_59E219B9C63D4C4CBD2BE80E4542002D]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Tag Corrected' datatype='integer' name='[Calculation_2254896057695039496]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF  [tag] =&apos;Churned&apos;&#13;&#10;THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+      </column>
+      <column caption='Negative Tag Corrected' datatype='integer' name='[Calculation_2254896058058981385]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='-sum([Calculation_2254896057695039496])' />
+      </column>
+      <column caption='Custom SQL Query' datatype='table' name='[__tableau_internal_object_id__].[_59E219B9C63D4C4CBD2BE80E4542002D]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='Custom SQL Query' id='_59E219B9C63D4C4CBD2BE80E4542002D'>
+            <properties context=''>
+              <relation connection='mysql.0n8n9oo0e4hz0d10veqk213a4lp9' name='Custom SQL Query' type='text'>select * from waterfall_last_30_days</relation>
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+    <datasource caption='waterfall(last90)' inline='true' name='federated.0ja7cio0ari5ez1gs3il60e4wwj1' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='localhost' name='mysql.00ykbho1lid9vq1b77vy51fhiqm2'>
+            <connection class='mysql' dbname='growth_data' odbc-native-protocol='' one-time-sql='' port='3306' server='localhost' source-charset='' username='root' />
+          </named-connection>
+        </named-connections>
+        <relation connection='mysql.00ykbho1lid9vq1b77vy51fhiqm2' name='Custom SQL Query' type='text'>select * from waterfall_last_90_days</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>user_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[user_id]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>user_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_515AD31E5E3D41DFA976A110C0544BE8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>current_status</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[current_status]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>current_status</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_515AD31E5E3D41DFA976A110C0544BE8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>plan</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[plan]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>plan</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_515AD31E5E3D41DFA976A110C0544BE8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tag</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[tag]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>tag</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[_515AD31E5E3D41DFA976A110C0544BE8]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Tag corrected' datatype='integer' name='[Calculation_2254896058190475274]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [tag] =&apos;Churned&apos;&#13;&#10;THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+      </column>
+      <column caption='Negative count' datatype='integer' name='[Calculation_2254896058190712843]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='-SUM([Calculation_2254896058190475274])' />
+      </column>
+      <column caption='Custom SQL Query' datatype='table' name='[__tableau_internal_object_id__].[_515AD31E5E3D41DFA976A110C0544BE8]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='Custom SQL Query' id='_515AD31E5E3D41DFA976A110C0544BE8'>
+            <properties context=''>
+              <relation connection='mysql.00ykbho1lid9vq1b77vy51fhiqm2' name='Custom SQL Query' type='text'>select * from waterfall_last_90_days</relation>
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
   </datasources>
   <worksheets>
     <worksheet name='Free'>
@@ -945,8 +1163,288 @@ ORDER BY date_paid DESC]]></relation>
       </table>
       <simple-id uuid='{EDBC9ADC-FDB2-4F5A-8632-FD2A7EF1E384}' />
     </worksheet>
+    <worksheet name='waterfall(last30)'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Subscriptions&apos;s Growth (last 30 days)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='waterfall(last30)' name='federated.0kj74xr0g166dz1bzyqo21q4qomy' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0kj74xr0g166dz1bzyqo21q4qomy'>
+            <column caption='Tag Corrected' datatype='integer' name='[Calculation_2254896057695039496]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF  [tag] =&apos;Churned&apos;&#13;&#10;THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+            </column>
+            <column caption='Negative Tag Corrected' datatype='integer' name='[Calculation_2254896058058981385]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='-sum([Calculation_2254896057695039496])' />
+            </column>
+            <column-instance column='[Calculation_2254896057695039496]' derivation='Sum' name='[cum:sum:Calculation_2254896057695039496:qk]' pivot='key' type='quantitative'>
+              <table-calc aggregation='Sum' ordering-type='Rows' type='CumTotal' />
+            </column-instance>
+            <column-instance column='[plan]' derivation='None' name='[none:plan:nk]' pivot='key' type='nominal' />
+            <column-instance column='[tag]' derivation='None' name='[none:tag:nk]' pivot='key' type='nominal' />
+            <column datatype='string' name='[plan]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896057695039496]' derivation='Sum' name='[sum:Calculation_2254896057695039496:qk]' pivot='key' type='quantitative' />
+            <column datatype='string' name='[tag]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896058058981385]' derivation='User' name='[usr:Calculation_2254896058058981385:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:plan:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:plan:nk]' member='&quot;Annual&quot;' />
+              <groupfilter function='member' level='[none:plan:nk]' member='&quot;Monthly&quot;' />
+              <groupfilter function='member' level='[none:plan:nk]' member='&quot;Quarterly&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:tag:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;Base&quot;</bucket>
+              <bucket>&quot;New&quot;</bucket>
+              <bucket>&quot;Churned&quot;</bucket>
+              <bucket>&quot;Resurrected&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:plan:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[cum:sum:Calculation_2254896057695039496:qk]' scope='rows' value='Subscriptions' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[usr:Calculation_2254896058058981385:qk]' include-totals='true' num-steps='2' reverse='true' type='custom-interpolated'>
+              <color-palette custom='true' name='' type='ordered-diverging'>
+                <color>#ff5050</color>
+                <color>#fb5e5e</color>
+                <color>#f86c6c</color>
+                <color>#f47a7a</color>
+                <color>#f18787</color>
+                <color>#ed9494</color>
+                <color>#eaa1a1</color>
+                <color>#e6adad</color>
+                <color>#e3b8b8</color>
+                <color>#dfc3c3</color>
+                <color>#dccece</color>
+                <color>#d9d9d9</color>
+                <color>#ccd6d7</color>
+                <color>#bfd4d5</color>
+                <color>#b3d1d4</color>
+                <color>#a6cfd2</color>
+                <color>#9acdd0</color>
+                <color>#8fcacf</color>
+                <color>#83c8cd</color>
+                <color>#77c5cb</color>
+                <color>#6cc3ca</color>
+                <color>#61c1c8</color>
+                <color>#56bfc7</color>
+              </color-palette>
+            </encoding>
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-width' data-class='total' value='0' />
+            <format attr='border-style' data-class='total' value='none' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:plan:nk]' value='Plan' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='GanttBar' />
+            <encodings>
+              <color column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[usr:Calculation_2254896058058981385:qk]' />
+              <size column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[usr:Calculation_2254896058058981385:qk]' />
+              <tooltip column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[sum:Calculation_2254896057695039496:qk]' />
+              <text column='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[sum:Calculation_2254896057695039496:qk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#757575'>Tag:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:tag:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#757575'>Count:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0kj74xr0g166dz1bzyqo21q4qomy].[sum:Calculation_2254896057695039496:qk]>]]></run>
+                <run>Æ&#10;&#10;</run>
+                <run fontcolor='#757575'>Running Total:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0kj74xr0g166dz1bzyqo21q4qomy].[cum:sum:Calculation_2254896057695039496:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0kj74xr0g166dz1bzyqo21q4qomy].[cum:sum:Calculation_2254896057695039496:qk]</rows>
+        <cols total='true'>[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:tag:nk]</cols>
+      </table>
+      <simple-id uuid='{2685A5F3-3431-4AEF-9826-3D63FB87359C}' />
+    </worksheet>
+    <worksheet name='waterfall(last365)'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{CA366402-F58C-47E1-B8C2-8717C855B778}' />
+    </worksheet>
+    <worksheet name='waterfall(last90)'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Subscriptions&apos;s Growth (last 90 days)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='waterfall(last90)' name='federated.0ja7cio0ari5ez1gs3il60e4wwj1' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0ja7cio0ari5ez1gs3il60e4wwj1'>
+            <column caption='Tag corrected' datatype='integer' name='[Calculation_2254896058190475274]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [tag] =&apos;Churned&apos;&#13;&#10;THEN -1&#13;&#10;ELSE 1&#13;&#10;END' />
+            </column>
+            <column caption='Negative count' datatype='integer' name='[Calculation_2254896058190712843]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='-SUM([Calculation_2254896058190475274])' />
+            </column>
+            <column-instance column='[Calculation_2254896058190475274]' derivation='Sum' name='[cum:sum:Calculation_2254896058190475274:qk]' pivot='key' type='quantitative'>
+              <table-calc aggregation='Sum' ordering-type='Rows' type='CumTotal' />
+            </column-instance>
+            <column-instance column='[plan]' derivation='None' name='[none:plan:nk]' pivot='key' type='nominal' />
+            <column-instance column='[tag]' derivation='None' name='[none:tag:nk]' pivot='key' type='nominal' />
+            <column datatype='string' name='[plan]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896058190475274]' derivation='Sum' name='[sum:Calculation_2254896058190475274:qk]' pivot='key' type='quantitative' />
+            <column datatype='string' name='[tag]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_2254896058190712843]' derivation='User' name='[usr:Calculation_2254896058190712843:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:plan:nk]'>
+            <groupfilter function='level-members' level='[none:plan:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <manual-sort column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:tag:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;Base&quot;</bucket>
+              <bucket>&quot;New&quot;</bucket>
+              <bucket>&quot;Churned&quot;</bucket>
+              <bucket>&quot;Resurrected&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:plan:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[cum:sum:Calculation_2254896058190475274:qk]' scope='rows' value='Subscriptions' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='border-width' data-class='total' scope='rows' value='0' />
+            <format attr='border-style' data-class='total' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' include-totals='true' num-steps='2' type='custom-interpolated'>
+              <color-palette custom='true' name='' type='ordered-diverging'>
+                <color>#ff5050</color>
+                <color>#fb5e5e</color>
+                <color>#f86c6c</color>
+                <color>#f47a7a</color>
+                <color>#f18787</color>
+                <color>#ed9494</color>
+                <color>#eaa1a1</color>
+                <color>#e6adad</color>
+                <color>#e3b8b8</color>
+                <color>#dfc3c3</color>
+                <color>#dccece</color>
+                <color>#d9d9d9</color>
+                <color>#ccd6d7</color>
+                <color>#bfd4d5</color>
+                <color>#b3d1d4</color>
+                <color>#a6cfd2</color>
+                <color>#9acdd0</color>
+                <color>#8fcacf</color>
+                <color>#83c8cd</color>
+                <color>#77c5cb</color>
+                <color>#6cc3ca</color>
+                <color>#61c1c8</color>
+                <color>#56bfc7</color>
+              </color-palette>
+            </encoding>
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-width' data-class='total' value='0' />
+            <format attr='border-style' data-class='total' value='none' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='GanttBar' />
+            <encodings>
+              <color column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' />
+              <size column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[usr:Calculation_2254896058190712843:qk]' />
+              <tooltip column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' />
+              <text column='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#757575'>Tag:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:tag:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#757575'>Count:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]>]]></run>
+                <run>Æ&#10;&#10;</run>
+                <run fontcolor='#757575'>Running Total:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[cum:sum:Calculation_2254896058190475274:qk]>]]></run>
+                <run>Æ&#10;</run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[cum:sum:Calculation_2254896058190475274:qk]</rows>
+        <cols total='true'>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:tag:nk]</cols>
+      </table>
+      <simple-id uuid='{C66D9A60-8C5E-4438-88FA-9A4019649B4C}' />
+    </worksheet>
   </worksheets>
-  <windows saved-dpi-scale-factor='1.25' source-height='63'>
+  <windows saved-dpi-scale-factor='1.25' source-height='115'>
     <window class='worksheet' name='Free'>
       <cards>
         <edge name='left'>
@@ -991,7 +1489,7 @@ ORDER BY date_paid DESC]]></relation>
       </viewpoint>
       <simple-id uuid='{C89A389A-9C75-45AD-8840-80EE99D92E9D}' />
     </window>
-    <window class='worksheet' maximized='true' name='Paid'>
+    <window class='worksheet' name='Paid'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1033,6 +1531,110 @@ ORDER BY date_paid DESC]]></relation>
         </highlight>
       </viewpoint>
       <simple-id uuid='{139E5C5E-AFD1-4957-8ADF-DFD0AB5B5A36}' />
+    </window>
+    <window class='worksheet' name='waterfall(last30)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:plan:nk]' type='filter' />
+            <card pane-specification-id='0' param='[federated.0kj74xr0g166dz1bzyqo21q4qomy].[usr:Calculation_2254896058058981385:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:plan:nk]</field>
+            <field>[federated.0kj74xr0g166dz1bzyqo21q4qomy].[none:tag:nk]</field>
+          </color-one-way>
+        </highlight>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{3F35365A-96FA-4625-B550-7296EC0CE3C6}' />
+    </window>
+    <window class='worksheet' name='waterfall(last90)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:plan:nk]' type='filter' />
+            <card pane-specification-id='0' param='[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[sum:Calculation_2254896058190475274:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:plan:nk]</field>
+            <field>[federated.0ja7cio0ari5ez1gs3il60e4wwj1].[none:tag:nk]</field>
+          </color-one-way>
+        </highlight>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{CD5346B9-EF34-489D-B7A9-C2B6087F9E3D}' />
+    </window>
+    <window class='worksheet' maximized='true' name='waterfall(last365)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{BBD19FB0-116E-4FB9-8BD7-AA01C1F6AE0C}' />
     </window>
   </windows>
   <thumbnails>
@@ -1495,6 +2097,178 @@ ORDER BY date_paid DESC]]></relation>
       +Hw+yttF3F4LUVobjlQKYZqkMxmi0RjlfArBP4DvgFkP3nvnR0TjCaqbC4TO/AwDXUoq/kk7
       V7aLOL07Yr1j5wBgoqoaiqI88hz7pPOkaYE0VUWSFQytgSE6LQV73eD/A/OGIuXynVlWAAAA
       AElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='waterfall(last30)' width='192'>
+      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
+      TkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='waterfall(last365)' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAACFUlEQVR4nO3TMQEAIAzAMMC/5yFjRxMFfXpnZg5Eve0A2GQA0gxAmgFIMwBpBiDNAKQZ
+      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
+      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQD
+      kGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBp
+      BiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA
+      0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDN
+      AKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxA
+      mgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZ
+      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
+      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKR9Y+0F
+      fBUOM1sAAAAASUVORK5CYII=
+    </thumbnail>
+    <thumbnail height='192' name='waterfall(last90)' width='192'>
+      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
+      /BF3GgAAAABJRU5ErkJggg==
     </thumbnail>
   </thumbnails>
 </workbook>
