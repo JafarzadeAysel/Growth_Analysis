@@ -8,10 +8,12 @@
     <MapboxVectorStylesAndLayers />
     <_.fcp.MarkAnimation.true...MarkAnimation />
     <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelExtractV2.true...ObjectModelExtractV2 />
     <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
     <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
     <SheetIdentifierTracking />
     <SortTagCleanup />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
     <WindowsPersistSimpleIdentifiers />
   </document-format-change-manifest>
   <preferences>
@@ -1908,6 +1910,463 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         </objects>
       </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
     </datasource>
+    <datasource caption='funnel' inline='true' name='federated.02srlo90dkk64o1gx0c461b0gdb3' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='localhost' name='mysql.0iwcjm80tscsw21cwq4e01g79pyu'>
+            <connection class='mysql' dbname='growth_data' odbc-native-protocol='' one-time-sql='' port='3306' server='localhost' source-charset='' username='root' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='mysql.0iwcjm80tscsw21cwq4e01g79pyu' name='Custom SQL Query' type='text'><![CDATA[WITH visitors_info as (
+	SELECT vi.visitor_id, 
+vi.user_id,
+vi.first_visit_date,
+IFNULL(REPLACE(se.utm_source,',',';'),'Organic') as channel, 
+si.date_registered,
+si.first_watch_date,
+MIN(su.date_purchased) AS first_purchase_date
+	FROM front_visitors vi
+INNER JOIN front_sessions se 
+on vi.visitor_id = se.visitor_id
+LEFT JOIN student_info si
+on vi.user_id = si.user_id
+LEFT JOIN student_purchases su
+on si.user_id = su.user_id
+WHERE vi.first_visit_date >>= '2022-07-01' AND (vi.first_visit_date << si.date_registered OR si.date_registered IS NULL)
+group by vi.visitor_id
+),
+count_all AS(
+SELECT COUNT(*) as count_visitors,
+first_visit_date,
+channel
+FROM visitors_info
+GROUP BY first_visit_date, channel),
+
+count_free AS (
+
+SELECT COUNT(*) as count_free,
+first_visit_date,
+channel
+FROM visitors_info
+WHERE date_registered IS NOT NULL 
+	AND
+    (first_purchase_date IS NULL OR TIMESTAMPDIFF(minute, date_registered, first_purchase_date) >> 30)
+GROUP BY first_visit_date, channel),
+
+count_watched AS (
+SELECT COUNT(*) as count_watched,
+first_visit_date,
+channel
+FROM visitors_info
+WHERE first_watch_date IS NOT NULL AND (first_purchase_date IS NULL OR first_watch_date << first_purchase_date)
+GROUP BY first_visit_date, channel ),
+
+count_paid AS (
+SELECT COUNT(*) as count_paid,
+first_visit_date,
+channel
+FROM visitors_info
+WHERE first_purchase_date IS NOT NULL
+GROUP BY first_visit_date, channel )
+
+SELECT
+	a.first_visit_date,
+    a.channel,
+    a.count_visitors,
+    IFNULL(f.count_free, 0) as count_free,
+    IFNULL(w.count_watched, 0) as count_watched,
+    IFNULL(p.count_paid, 0) as count_paid
+FROM
+	count_all as a
+    LEFT JOIN
+    count_free as f ON a.first_visit_date = f.first_visit_date AND a.channel = f.channel
+    LEFT JOIN
+    count_watched as w ON a.first_visit_date = w.first_visit_date AND a.channel = w.channel
+    LEFT JOIN
+    count_paid as p ON a.first_visit_date = p.first_visit_date AND a.channel = p.channel
+ORDER BY first_visit_date, count_visitors DESC]]></_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='mysql.0iwcjm80tscsw21cwq4e01g79pyu' name='Custom SQL Query' type='text'><![CDATA[WITH visitors_info as (
+	SELECT vi.visitor_id, 
+vi.user_id,
+vi.first_visit_date,
+IFNULL(REPLACE(se.utm_source,',',';'),'Organic') as channel, 
+si.date_registered,
+si.first_watch_date,
+MIN(su.date_purchased) AS first_purchase_date
+	FROM front_visitors vi
+INNER JOIN front_sessions se 
+on vi.visitor_id = se.visitor_id
+LEFT JOIN student_info si
+on vi.user_id = si.user_id
+LEFT JOIN student_purchases su
+on si.user_id = su.user_id
+WHERE vi.first_visit_date >>= '2022-07-01' AND (vi.first_visit_date << si.date_registered OR si.date_registered IS NULL)
+group by vi.visitor_id
+),
+count_all AS(
+SELECT COUNT(*) as count_visitors,
+first_visit_date,
+channel
+FROM visitors_info
+GROUP BY first_visit_date, channel),
+
+count_free AS (
+
+SELECT COUNT(*) as count_free,
+first_visit_date,
+channel
+FROM visitors_info
+WHERE date_registered IS NOT NULL 
+	AND
+    (first_purchase_date IS NULL OR TIMESTAMPDIFF(minute, date_registered, first_purchase_date) >> 30)
+GROUP BY first_visit_date, channel),
+
+count_watched AS (
+SELECT COUNT(*) as count_watched,
+first_visit_date,
+channel
+FROM visitors_info
+WHERE first_watch_date IS NOT NULL AND (first_purchase_date IS NULL OR first_watch_date << first_purchase_date)
+GROUP BY first_visit_date, channel ),
+
+count_paid AS (
+SELECT COUNT(*) as count_paid,
+first_visit_date,
+channel
+FROM visitors_info
+WHERE first_purchase_date IS NOT NULL
+GROUP BY first_visit_date, channel )
+
+SELECT
+	a.first_visit_date,
+    a.channel,
+    a.count_visitors,
+    IFNULL(f.count_free, 0) as count_free,
+    IFNULL(w.count_watched, 0) as count_watched,
+    IFNULL(p.count_paid, 0) as count_paid
+FROM
+	count_all as a
+    LEFT JOIN
+    count_free as f ON a.first_visit_date = f.first_visit_date AND a.channel = f.channel
+    LEFT JOIN
+    count_watched as w ON a.first_visit_date = w.first_visit_date AND a.channel = w.channel
+    LEFT JOIN
+    count_paid as p ON a.first_visit_date = p.first_visit_date AND a.channel = p.channel
+ORDER BY first_visit_date, count_visitors DESC]]></_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>first_visit_date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[first_visit_date]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>first_visit_date</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_TYPE_DATE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_TYPE_DATE&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>channel</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[channel]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>channel</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>1048560</width>
+            <contains-null>false</contains-null>
+            <cast-to-local-type>true</cast-to-local-type>
+            <collation charset='296' flag='3' name='LROOT_S1' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>count_visitors</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[count_visitors]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>count_visitors</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>count_free</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[count_free]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>count_free</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>count_watched</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[count_watched]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>count_watched</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>count_paid</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[count_paid]</local-name>
+            <parent-name>[Custom SQL Query]</parent-name>
+            <remote-alias>count_paid</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='string' name='[:Measure Names]' role='dimension' type='nominal'>
+        <aliases>
+          <alias key='&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_free:qk]&quot;' value='Free' />
+          <alias key='&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_paid:qk]&quot;' value='Paid (All)' />
+          <alias key='&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_visitors:qk]&quot;' value='Visitors' />
+          <alias key='&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_watched:qk]&quot;' value='Watched Content' />
+        </aliases>
+      </column>
+      <_.fcp.ObjectModelTableType.true...column caption='Custom SQL Query' datatype='table' name='[__tableau_internal_object_id__].[_15F79C4F86F8486087AE5D18CE913BFD]' role='measure' type='quantitative' />
+      <column datatype='string' name='[channel]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[count_free]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[count_paid]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[count_visitors]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[count_watched]' role='measure' type='quantitative' />
+      <column-instance column='[count_free]' derivation='Sum' name='[sum:count_free:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[count_paid]' derivation='Sum' name='[sum:count_paid:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[count_visitors]' derivation='Sum' name='[sum:count_visitors:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[count_watched]' derivation='Sum' name='[sum:count_watched:qk]' pivot='key' type='quantitative' />
+      <group caption='channel Set' name='[channel Set]' name-style='unqualified' user:ui-builder='filter-group'>
+        <groupfilter count='[Parameters].[Parameter 5]' end='top' function='end' units='records' user:ui-marker='end' user:ui-top-by-field='true'>
+          <groupfilter direction='DESC' expression='SUM([count_paid])' function='order' user:ui-marker='order'>
+            <groupfilter function='level-members' level='[channel]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </groupfilter>
+        </groupfilter>
+      </group>
+      <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='C:/Users/User/Downloads/funnel.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='06/15/2025 07:34:07 PM' username='tableau_internal_user'>
+          <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <_.fcp.ObjectModelEncapsulateLegacy.true...relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh>
+            <refresh-event add-from-file-path='funnel' increment-value='%null%' refresh-type='create' rows-inserted='3479' timestamp-start='2025-06-15 19:33:48.178' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>first_visit_date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[first_visit_date]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>first_visit_date</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>123</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>channel</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[channel]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>channel</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>171</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='3' name='LROOT_S1' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>count_visitors</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[count_visitors]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>count_visitors</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>233</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>count_free</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[count_free]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>count_free</remote-alias>
+              <ordinal>3</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>76</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>count_watched</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[count_watched]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>count_watched</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>61</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>count_paid</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[count_paid]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>count_paid</remote-alias>
+              <ordinal>5</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>14</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_15F79C4F86F8486087AE5D18CE913BFD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Top N Channels' datatype='integer' name='[Parameter 5]' param-domain-type='range' role='measure' type='quantitative' value='10'>
+          <calculation class='tableau' formula='10' />
+          <range granularity='1' max='300' min='1' />
+        </column>
+      </datasource-dependencies>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='Custom SQL Query' id='_15F79C4F86F8486087AE5D18CE913BFD'>
+            <properties context=''>
+              <relation connection='mysql.0iwcjm80tscsw21cwq4e01g79pyu' name='Custom SQL Query' type='text'><![CDATA[WITH visitors_info as (
+	SELECT vi.visitor_id, 
+vi.user_id,
+vi.first_visit_date,
+IFNULL(REPLACE(se.utm_source,',',';'),'Organic') as channel, 
+si.date_registered,
+si.first_watch_date,
+MIN(su.date_purchased) AS first_purchase_date
+	FROM front_visitors vi
+INNER JOIN front_sessions se 
+on vi.visitor_id = se.visitor_id
+LEFT JOIN student_info si
+on vi.user_id = si.user_id
+LEFT JOIN student_purchases su
+on si.user_id = su.user_id
+WHERE vi.first_visit_date >>= '2022-07-01' AND (vi.first_visit_date << si.date_registered OR si.date_registered IS NULL)
+group by vi.visitor_id
+),
+count_all AS(
+SELECT COUNT(*) as count_visitors,
+first_visit_date,
+channel
+FROM visitors_info
+GROUP BY first_visit_date, channel),
+
+count_free AS (
+
+SELECT COUNT(*) as count_free,
+first_visit_date,
+channel
+FROM visitors_info
+WHERE date_registered IS NOT NULL 
+	AND
+    (first_purchase_date IS NULL OR TIMESTAMPDIFF(minute, date_registered, first_purchase_date) >> 30)
+GROUP BY first_visit_date, channel),
+
+count_watched AS (
+SELECT COUNT(*) as count_watched,
+first_visit_date,
+channel
+FROM visitors_info
+WHERE first_watch_date IS NOT NULL AND (first_purchase_date IS NULL OR first_watch_date << first_purchase_date)
+GROUP BY first_visit_date, channel ),
+
+count_paid AS (
+SELECT COUNT(*) as count_paid,
+first_visit_date,
+channel
+FROM visitors_info
+WHERE first_purchase_date IS NOT NULL
+GROUP BY first_visit_date, channel )
+
+SELECT
+	a.first_visit_date,
+    a.channel,
+    a.count_visitors,
+    IFNULL(f.count_free, 0) as count_free,
+    IFNULL(w.count_watched, 0) as count_watched,
+    IFNULL(p.count_paid, 0) as count_paid
+FROM
+	count_all as a
+    LEFT JOIN
+    count_free as f ON a.first_visit_date = f.first_visit_date AND a.channel = f.channel
+    LEFT JOIN
+    count_watched as w ON a.first_visit_date = w.first_visit_date AND a.channel = w.channel
+    LEFT JOIN
+    count_paid as p ON a.first_visit_date = p.first_visit_date AND a.channel = p.channel
+ORDER BY first_visit_date, count_visitors DESC]]></relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
   </datasources>
   <mapsources>
     <mapsource name='Tableau' />
@@ -2316,6 +2775,300 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <cols>([federated.0qfa7gr1qgg4in1h5my6q077vebu].[yr:Calculation_2254896057488297988:ok] / [federated.0qfa7gr1qgg4in1h5my6q077vebu].[none:Calculation_2254896057488297988:ok])</cols>
       </table>
       <simple-id uuid='{EDBC9ADC-FDB2-4F5A-8632-FD2A7EF1E384}' />
+    </worksheet>
+    <worksheet name='Sheet 17'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Visitor-to-paid Funnel</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='funnel' name='federated.02srlo90dkk64o1gx0c461b0gdb3' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Top N Channels' datatype='integer' name='[Parameter 5]' param-domain-type='range' role='measure' type='quantitative' value='10'>
+              <calculation class='tableau' formula='10' />
+              <range granularity='1' max='300' min='1' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.02srlo90dkk64o1gx0c461b0gdb3'>
+            <_.fcp.ObjectModelTableType.true...column caption='Custom SQL Query' datatype='table' name='[__tableau_internal_object_id__].[_15F79C4F86F8486087AE5D18CE913BFD]' role='measure' type='quantitative' />
+            <column-instance column='[__tableau_internal_object_id__].[_15F79C4F86F8486087AE5D18CE913BFD]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:_15F79C4F86F8486087AE5D18CE913BFD:qk]' pivot='key' type='quantitative' />
+            <column datatype='string' name='[channel]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[count_free]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[count_paid]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[count_visitors]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[count_watched]' role='measure' type='quantitative' />
+            <column datatype='date' name='[first_visit_date]' role='dimension' type='ordinal' />
+            <column-instance column='[channel]' derivation='None' name='[none:channel:nk]' pivot='key' type='nominal' />
+            <column-instance column='[first_visit_date]' derivation='None' name='[none:first_visit_date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[count_free]' derivation='Sum' name='[sum:count_free:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[count_paid]' derivation='Sum' name='[sum:count_paid:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[count_visitors]' derivation='Sum' name='[sum:count_visitors:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[count_watched]' derivation='Sum' name='[sum:count_watched:qk]' pivot='key' type='quantitative' />
+            <_.fcp.ObjectModelTableType.false...column caption='Custom SQL Query' datatype='integer' name='[__tableau_internal_object_id__].[_15F79C4F86F8486087AE5D18CE913BFD]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.02srlo90dkk64o1gx0c461b0gdb3].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_visitors:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_free:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_watched:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_paid:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.02srlo90dkk64o1gx0c461b0gdb3].[:Measure Names]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_visitors:qk]&quot;</bucket>
+              <bucket>&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_free:qk]&quot;</bucket>
+              <bucket>&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_watched:qk]&quot;</bucket>
+              <bucket>&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[__tableau_internal_object_id__].[cnt:_15F79C4F86F8486087AE5D18CE913BFD:qk]&quot;</bucket>
+              <bucket>&quot;[federated.02srlo90dkk64o1gx0c461b0gdb3].[sum:count_paid:qk]&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <filter class='categorical' column='[federated.02srlo90dkk64o1gx0c461b0gdb3].[channel Set]' />
+          <filter class='categorical' column='[federated.02srlo90dkk64o1gx0c461b0gdb3].[none:channel:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;+12722001337Coupon Return&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Abdul&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;adgoal GmbH&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;aDqCFYfU&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;aDqCFYfUUeSb&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ahmed Mohamedâ€Š&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;AlexTheAnalyst&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Anand Yadav&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Anastasiia Kotsiubynska&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Andrew Treadway&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Any Instructor&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Asem Jundi&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ATM.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;BBV&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;be level&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;BenefitHub; Inc&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;bestcourses.io&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Bhavin Toliya&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Bhylu&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Bing Rebates by Microsoft&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Brandreward  Coupons&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;bti-social-media&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;BZ&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;career_guide&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;chanin&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Chinmay Academy&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Clever Technologies LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;CodesWodes&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ColorMango.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Coopanz&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Cornellius Yudha Wijaya&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Coupon Reals&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;COUPON2DEAL LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Couponnxt&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;couponpa&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;CouponsLab&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;CouponzGuru&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Coupoonz&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_advanced_stats&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_cluster_analysis&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_confidence&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_descriptive&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;course_notes_webscraping&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Coursenator&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;coursereport&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Daily Reviews&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Danish Ahmed Khan&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Danish Hussain&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Data Science Society&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;data-science-interview-questions-pdf&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;data-science-job-report-2020-pdf&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;DataAnalyst.news&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;datamodelling.org&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;datascienceboom&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;datasciencepr.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;DataScientist.today&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;DealAm.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;dealschief.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Dealwisher.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Demand.io&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Dev Media FZCO&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;devCount&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;digidip GmbH&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Digital Splendid OPC Private Limited&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Digmycart Ltd&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;DiscountReactor&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;download-career-guide&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Dr. D. M. Hardy&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Dresspromo&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ds-booklet&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ebgb-fdvfadf-vagfeivfj-dhffgvbaf-cea&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;eDealinfo USA Inc.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;email-sendgrid&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Emmanuel Kuebutornye&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Etienne Noumen&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Extrabux&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;facebook&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;facebook.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Giles McMullen-Klein&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Greenwood MonkeyBars LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Gregory Hogg&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Grundit LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;guru99&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;hellotinah&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Home Delivery&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Honey Science Corporation.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Hoopla Doopla; Inc.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;i[â€¦]=2022 start for free&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Ibotta Inc&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;IBTimes Aff&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Igor Sharshakov&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;influencer&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-campaign-career-guide&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-campaign-tofu&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-newsletter&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-pop-up&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;infusionsoft-sitewide&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;instagram&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;James Asher&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Karma Shopping&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;kdnuggets&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;kdnuggets.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Kellar&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ketan raval&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;kjeeone&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;LearnData.today&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Lending Partners&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;link-building&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Linkbux&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;linkedin&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Liquid Traffic&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Love Savings Group&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Machine Learning&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Mark Ways&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Max Rebates&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Mazitsol; LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;medium&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Meer&apos;s World&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Melhem&apos;s affiliate&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;MK INFOTECH PTE LTD&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Mohammad Shoaib&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;mopubiâ€Š&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;MTN PRESS&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Muchila Holdings Ltd.&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Muhammad Usama&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;myWorld 360 AG&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;nakarta&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;NetrockDeals&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;nichedata&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Noble House Group Belgium&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;offcampusjobs4u.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Olivier Maugain&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Online Courseing&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Organic&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;phuongcala&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;pinterest&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;PluralSight&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;plus.google.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;pocket_mylist&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;pointersrl&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;pro4max&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Prodege; LLC - CouponCause.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Promosinn&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;quora&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;reddit&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;REE SOLUTIONS INC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Refermate LLC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;reputation roi inc&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;reviewsint&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Revounts&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;rs&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;saashub&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;SAP Target&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;sciencefunn&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;seederlist&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;sendgrid.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Sharkcoupons&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;shibazaki&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Shifty@123&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;siwei chen&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;smart search tech&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;smart.reviews&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Smarttfix&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;social&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Social Good App&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Sovrn Commerce&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Spring+Sale&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Sudipta Mondal&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Summer+Sale&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;techzoon&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;The Ravit Show&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;tiktok&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;trustpilot&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;trustradius.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;twitter&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;twitter.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ultimate-career-guide-pdf&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;vaahfvbafbag&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Verified Promo Code&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Very Important Relationships Inc.  (VIR)&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Victory Tale&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Vinod Vishwakarma Digital India&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;webinar&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Website&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Webtech Solutions&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Wickfire&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;Wildfire Systems&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;WinningPC&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;womaneng&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;www.ritecoupons.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;www.yourwisedeal.com&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;YieldKit GmbH&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;youtube&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;ytb&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;YUNIKARN LTD&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;yvaxfeva&quot;' />
+              <groupfilter function='member' level='[none:channel:nk]' member='&quot;zalo&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='quantitative' column='[federated.02srlo90dkk64o1gx0c461b0gdb3].[none:first_visit_date:qk]' context='true' included-values='in-range'>
+            <min>#2022-07-01#</min>
+            <max>#2022-10-31#</max>
+          </filter>
+          <slices>
+            <column>[federated.02srlo90dkk64o1gx0c461b0gdb3].[none:first_visit_date:qk]</column>
+            <column>[federated.02srlo90dkk64o1gx0c461b0gdb3].[:Measure Names]</column>
+            <column>[federated.02srlo90dkk64o1gx0c461b0gdb3].[none:channel:nk]</column>
+            <column>[federated.02srlo90dkk64o1gx0c461b0gdb3].[channel Set]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.02srlo90dkk64o1gx0c461b0gdb3].[Multiple Values]' scope='cols' value='Count' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-color' value='#56bfc7' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.02srlo90dkk64o1gx0c461b0gdb3].[:Measure Names]</rows>
+        <cols>[federated.02srlo90dkk64o1gx0c461b0gdb3].[Multiple Values]</cols>
+      </table>
+      <simple-id uuid='{0A98B316-D7E1-475C-A179-77BAFD69E4AE}' />
     </worksheet>
     <worksheet name='current_monthly'>
       <table>
@@ -4322,7 +5075,7 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
       <simple-id uuid='{4A5FD385-A2EC-4052-A520-4A9AD6C23559}' />
     </worksheet>
   </worksheets>
-  <windows saved-dpi-scale-factor='1.25' source-height='245'>
+  <windows saved-dpi-scale-factor='1.25' source-height='271'>
     <window class='worksheet' name='Free'>
       <cards>
         <edge name='left'>
@@ -4875,7 +5628,7 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
       </viewpoint>
       <simple-id uuid='{8D748E8D-7735-47B4-A85E-6955E19CC461}' />
     </window>
-    <window class='worksheet' maximized='true' name='map_paid'>
+    <window class='worksheet' name='map_paid'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -4913,6 +5666,48 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         </highlight>
       </viewpoint>
       <simple-id uuid='{60A5150D-BDBE-484F-AD37-B52F8D2D35E8}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Sheet 17'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.02srlo90dkk64o1gx0c461b0gdb3].[none:first_visit_date:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.02srlo90dkk64o1gx0c461b0gdb3].[none:channel:nk]' type='filter' values='context' />
+            <card mode='type_in' param='[Parameters].[Parameter 5]' type='parameter' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.02srlo90dkk64o1gx0c461b0gdb3].[:Measure Names]</field>
+            <field>[federated.02srlo90dkk64o1gx0c461b0gdb3].[channel Set]</field>
+            <field>[federated.02srlo90dkk64o1gx0c461b0gdb3].[none:channel:nk]</field>
+            <field>[federated.02srlo90dkk64o1gx0c461b0gdb3].[none:first_visit_date:qk]</field>
+          </color-one-way>
+        </highlight>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{A72452B5-D3D2-4AF6-8817-1D6027F271FD}' />
     </window>
   </windows>
   <thumbnails>
@@ -5375,6 +6170,118 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
       +Hw+yttF3F4LUVobjlQKYZqkMxmi0RjlfArBP4DvgFkP3nvnR0TjCaqbC4TO/AwDXUoq/kk7
       V7aLOL07Yr1j5wBgoqoaiqI88hz7pPOkaYE0VUWSFQytgSE6LQV73eD/A/OGIuXynVlWAAAA
       AElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='147' name='Sheet 17' width='192'>
+      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
+      RK5CYII=
     </thumbnail>
     <thumbnail height='69' name='current_monthly' width='104'>
       iVBORw0KGgoAAAANSUhEUgAAAGgAAABFCAYAAACmLqNJAAAACXBIWXMAABJ0AAASdAHeZh94
