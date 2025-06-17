@@ -7812,8 +7812,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1400' minheight='1400' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='49' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='48' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='51' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='50' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -8252,8 +8252,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1000' minheight='1000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='62' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='61' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='64' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='63' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -8680,8 +8680,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1000' minheight='1000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='64' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='63' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='66' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='65' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{7D487C84-6A03-4F6B-BF15-1F10657DE548}&quot;'>
                     <button-visual-state>
@@ -9108,8 +9108,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1000' minheight='1000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='62' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='61' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='64' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='63' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{7D487C84-6A03-4F6B-BF15-1F10657DE548}&quot;'>
                     <button-visual-state>
@@ -9586,8 +9586,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1250' minheight='1250' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='100' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='99' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='102' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='101' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -10094,8 +10094,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1250' minheight='1250' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='105' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='104' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='107' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='106' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -10578,8 +10578,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1100' minheight='1100' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='99' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='98' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='101' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='100' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -11051,8 +11051,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1100' minheight='1100' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='99' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='98' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='101' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='100' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -11524,8 +11524,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1100' minheight='1100' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='99' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='98' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='101' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='100' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -11974,8 +11974,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='800' minheight='800' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='96' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='95' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='98' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='97' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{7D487C84-6A03-4F6B-BF15-1F10657DE548}&quot;'>
                     <button-visual-state>
@@ -12291,8 +12291,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='34' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='33' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='36' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='35' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='43' h='6218' id='21' is-fixed='true' is-scaled='1' param='C:/Users/User/Documents/Tableau/Growth_Analysis/365 logo 300px (white transp).png' type-v2='bitmap' w='15333' x='1333' y='1830'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -13340,7 +13340,7 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
     </window>
     <window class='dashboard' maximized='true' name='Dashboard Home'>
       <viewpoints />
-      <active id='30' />
+      <active id='5' />
       <simple-id uuid='{9735C775-0A54-4339-BC6C-5287695BFFAD}' />
     </window>
   </windows>
