@@ -7812,8 +7812,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1400' minheight='1400' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='53' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='52' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='55' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='54' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -8252,8 +8252,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1000' minheight='1000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='66' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='65' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='68' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='67' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -8680,8 +8680,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1000' minheight='1000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='68' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='67' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='70' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='69' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{7D487C84-6A03-4F6B-BF15-1F10657DE548}&quot;'>
                     <button-visual-state>
@@ -9108,8 +9108,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1000' minheight='1000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='66' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='65' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='68' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='67' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{7D487C84-6A03-4F6B-BF15-1F10657DE548}&quot;'>
                     <button-visual-state>
@@ -9586,8 +9586,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1250' minheight='1250' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='104' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='103' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='106' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='105' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -10094,8 +10094,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1250' minheight='1250' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='109' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='108' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='111' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='110' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -10578,8 +10578,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1100' minheight='1100' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='103' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='102' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='105' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='104' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -11051,8 +11051,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1100' minheight='1100' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='103' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='102' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='105' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='104' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -11524,8 +11524,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1100' minheight='1100' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='103' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='102' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='105' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='104' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{9735C775-0A54-4339-BC6C-5287695BFFAD}&quot;'>
                     <button-visual-state>
@@ -11974,8 +11974,8 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='800' minheight='800' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='100' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='99' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='102' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='101' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='222' h='10976' id='5' type-v2='dashboard-object' w='15333' x='3333' y='0'>
                   <button action='tabdoc:goto-sheet window-id=&quot;{7D487C84-6A03-4F6B-BF15-1F10657DE548}&quot;'>
                     <button-visual-state>
@@ -12285,14 +12285,287 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
               <format attr='background-color' value='#293343' />
             </zone-style>
           </zone>
+          <zone fixed-size='34' h='4146' id='39' is-fixed='true' type-v2='empty' w='100000' x='0' y='21341'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='0' />
+              <format attr='background-color' value='#e6e6e6' />
+            </zone-style>
+          </zone>
+          <zone fixed-size='270' h='32927' id='41' is-fixed='true' param='horz' type-v2='layout-flow' w='100000' x='0' y='25487'>
+            <zone fixed-size='42' h='32927' id='42' is-fixed='true' type-v2='empty' w='3333' x='0' y='25487'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='4' />
+              </zone-style>
+            </zone>
+            <zone fixed-size='400' h='32927' id='43' is-fixed='true' param='vert' type-v2='layout-flow' w='26667' x='3333' y='25487'>
+              <zone forceUpdate='true' h='7805' id='49' type-v2='text' w='26667' x='3333' y='25487'>
+                <formatted-text>
+                  <run fontalignment='1' fontcolor='#000000' fontsize='12'>Current </run>
+                  <run bold='true' fontalignment='1' fontcolor='#000000' fontsize='12'>Monthly</run>
+                  <run fontalignment='1' fontcolor='#000000' fontsize='12'> Subscriptions </run>
+                  <run fontalignment='1'>Æ&#10;</run>
+                  <run fontalignment='1' fontcolor='#000000' fontsize='12'>(+ growth for last 30 days)</run>
+                </formatted-text>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone fixed-size='12' h='2439' id='50' is-fixed='true' type-v2='empty' w='26667' x='3333' y='33292'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone fixed-size='150' h='18293' id='51' is-fixed='true' param='horz' type-v2='layout-flow' w='26667' x='3333' y='35731'>
+                <zone fixed-size='52' h='18293' id='52' is-fixed='true' type-v2='empty' w='4000' x='3333' y='35731'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='142' h='18293' id='53' is-centered='0' is-fixed='true' param='C:/Users/User/Documents/Tableau/Growth_Analysis/monthly.png' type-v2='bitmap' w='10000' x='7333' y='35731'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='108' h='18293' id='55' is-fixed='true' param='vert' type-v2='layout-flow' w='7200' x='17333' y='35731'>
+                  <zone h='8903' id='57' name='current_monthly' show-title='false' w='7200' x='17333' y='35731'>
+                    <layout-cache fixed-size-h='65' fixed-size-w='100' type-h='fixed' type-w='fixed' />
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='4878' id='58' name='monthly_growth' show-title='false' w='7200' x='17333' y='44634'>
+                    <layout-cache fixed-size-h='32' fixed-size-w='100' type-h='fixed' type-w='fixed' />
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='4512' id='56' type-v2='empty' w='7200' x='17333' y='49512'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='background-color' value='#ffffff' />
+              </zone-style>
+            </zone>
+            <zone fixed-size='92' h='32927' id='44' is-fixed='true' type-v2='empty' w='6666' x='30000' y='25487'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='4' />
+              </zone-style>
+            </zone>
+            <zone fixed-size='400' h='32927' id='45' is-fixed='true' param='vert' type-v2='layout-flow' w='26667' x='36666' y='25487'>
+              <zone h='7805' id='59' type-v2='text' w='26667' x='36666' y='25487'>
+                <formatted-text>
+                  <run fontalignment='1' fontcolor='#000000' fontsize='12'>Current </run>
+                  <run bold='true' fontalignment='1' fontcolor='#000000' fontsize='12'>Quarterly</run>
+                  <run fontalignment='1' fontcolor='#000000' fontsize='12'> Subscriptions </run>
+                  <run fontalignment='1'>Æ&#10;</run>
+                  <run fontalignment='1' fontcolor='#000000' fontsize='12'>(+ growth for last 30 days)</run>
+                </formatted-text>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone fixed-size='12' h='2439' id='60' is-fixed='true' type-v2='empty' w='26667' x='36666' y='33292'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone fixed-size='150' h='18293' id='61' is-fixed='true' param='horz' type-v2='layout-flow' w='26667' x='36666' y='35731'>
+                <zone fixed-size='52' h='18293' id='65' is-fixed='true' type-v2='empty' w='4000' x='36666' y='35731'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='142' h='18293' id='66' is-centered='0' is-fixed='true' param='C:/Users/User/Documents/Tableau/Growth_Analysis/quarterly.png' type-v2='bitmap' w='10000' x='40666' y='35731'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone h='18293' id='67' param='vert' type-v2='layout-flow' w='7200' x='50666' y='35731'>
+                  <zone h='8903' id='68' name='current_quarterly' show-title='false' w='7200' x='50666' y='35731'>
+                    <layout-cache fixed-size-h='65' fixed-size-w='80' type-h='fixed' type-w='fixed' />
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='4878' id='69' name='quarterly_growth' show-title='false' w='7200' x='50666' y='44634'>
+                    <layout-cache fixed-size-h='32' fixed-size-w='100' type-h='fixed' type-w='fixed' />
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='background-color' value='#ffffff' />
+              </zone-style>
+            </zone>
+            <zone fixed-size='92' h='32927' id='46' is-fixed='true' type-v2='empty' w='6666' x='63333' y='25487'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='4' />
+              </zone-style>
+            </zone>
+            <zone fixed-size='400' h='32927' id='47' is-fixed='true' param='vert' type-v2='layout-flow' w='26667' x='69999' y='25487'>
+              <zone h='7805' id='62' type-v2='text' w='26667' x='69999' y='25487'>
+                <formatted-text>
+                  <run fontalignment='1' fontcolor='#000000' fontsize='12'>Current </run>
+                  <run bold='true' fontalignment='1' fontcolor='#000000' fontsize='12'>Annual</run>
+                  <run fontalignment='1' fontcolor='#000000' fontsize='12'> Subscriptions </run>
+                  <run fontalignment='1'>Æ&#10;</run>
+                  <run fontalignment='1' fontcolor='#000000' fontsize='12'>(+ growth for last 30 days)</run>
+                </formatted-text>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone fixed-size='12' h='2439' id='63' is-fixed='true' type-v2='empty' w='26667' x='69999' y='33292'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone fixed-size='150' h='18293' id='64' is-fixed='true' param='horz' type-v2='layout-flow' w='26667' x='69999' y='35731'>
+                <zone fixed-size='52' h='18293' id='70' is-fixed='true' type-v2='empty' w='4000' x='69999' y='35731'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='142' h='18293' id='71' is-centered='0' is-fixed='true' param='C:/Users/User/Documents/Tableau/Growth_Analysis/annual.png' type-v2='bitmap' w='10000' x='73999' y='35731'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone h='18293' id='72' param='vert' type-v2='layout-flow' w='9867' x='83999' y='35731'>
+                  <zone h='8903' id='73' name='current_yearly' show-title='false' w='9867' x='83999' y='35731'>
+                    <layout-cache fixed-size-h='65' fixed-size-w='140' type-h='fixed' type-w='fixed' />
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='4878' id='74' name='yearly_growth' show-title='false' w='9867' x='83999' y='44634'>
+                    <layout-cache fixed-size-h='32' fixed-size-w='120' type-h='fixed' type-w='fixed' />
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='background-color' value='#ffffff' />
+              </zone-style>
+            </zone>
+            <zone h='32927' id='48' type-v2='empty' w='3334' x='96666' y='25487'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='4' />
+              </zone-style>
+            </zone>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='background-color' value='#e6e6e6' />
+            </zone-style>
+          </zone>
+          <zone fixed-size='35' h='4268' id='40' is-fixed='true' type-v2='empty' w='100000' x='0' y='58414'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='0' />
+              <format attr='background-color' value='#e6e6e6' />
+            </zone-style>
+          </zone>
         </zone>
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
-          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <size maxheight='1400' minheight='1400' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='38' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98048' id='37' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
+            <zone h='100000' id='76' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98048' id='75' param='vert' type-v2='layout-flow' w='98934' x='533' y='976'>
                 <zone fixed-size='43' h='6218' id='21' is-fixed='true' is-scaled='1' param='C:/Users/User/Documents/Tableau/Growth_Analysis/365 logo 300px (white transp).png' type-v2='bitmap' w='15333' x='1333' y='1830'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -12359,6 +12632,141 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
                   <formatted-text>
                     <run fontalignment='1' fontcolor='#ffffff' fontsize='10'>Last updated on: 31/10/2022</run>
                   </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone forceUpdate='true' h='7805' id='49' type-v2='text' w='26667' x='3333' y='25487'>
+                  <formatted-text>
+                    <run fontalignment='1' fontcolor='#000000' fontsize='12'>Current </run>
+                    <run bold='true' fontalignment='1' fontcolor='#000000' fontsize='12'>Monthly</run>
+                    <run fontalignment='1' fontcolor='#000000' fontsize='12'> Subscriptions </run>
+                    <run fontalignment='1'>Æ&#10;</run>
+                    <run fontalignment='1' fontcolor='#000000' fontsize='12'>(+ growth for last 30 days)</run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='7805' id='59' type-v2='text' w='26667' x='36666' y='25487'>
+                  <formatted-text>
+                    <run fontalignment='1' fontcolor='#000000' fontsize='12'>Current </run>
+                    <run bold='true' fontalignment='1' fontcolor='#000000' fontsize='12'>Quarterly</run>
+                    <run fontalignment='1' fontcolor='#000000' fontsize='12'> Subscriptions </run>
+                    <run fontalignment='1'>Æ&#10;</run>
+                    <run fontalignment='1' fontcolor='#000000' fontsize='12'>(+ growth for last 30 days)</run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='7805' id='62' type-v2='text' w='26667' x='69999' y='25487'>
+                  <formatted-text>
+                    <run fontalignment='1' fontcolor='#000000' fontsize='12'>Current </run>
+                    <run bold='true' fontalignment='1' fontcolor='#000000' fontsize='12'>Annual</run>
+                    <run fontalignment='1' fontcolor='#000000' fontsize='12'> Subscriptions </run>
+                    <run fontalignment='1'>Æ&#10;</run>
+                    <run fontalignment='1' fontcolor='#000000' fontsize='12'>(+ growth for last 30 days)</run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='142' h='18293' id='53' is-centered='0' is-fixed='true' param='C:/Users/User/Documents/Tableau/Growth_Analysis/monthly.png' type-v2='bitmap' w='10000' x='7333' y='35731'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='65' h='8903' id='57' is-fixed='true' name='current_monthly' show-title='false' w='7200' x='17333' y='35731'>
+                  <layout-cache fixed-size-h='65' fixed-size-w='100' type-h='fixed' type-w='fixed' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='142' h='18293' id='66' is-centered='0' is-fixed='true' param='C:/Users/User/Documents/Tableau/Growth_Analysis/quarterly.png' type-v2='bitmap' w='10000' x='40666' y='35731'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='65' h='8903' id='68' is-fixed='true' name='current_quarterly' show-title='false' w='7200' x='50666' y='35731'>
+                  <layout-cache fixed-size-h='65' fixed-size-w='80' type-h='fixed' type-w='fixed' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='142' h='18293' id='71' is-centered='0' is-fixed='true' param='C:/Users/User/Documents/Tableau/Growth_Analysis/annual.png' type-v2='bitmap' w='10000' x='73999' y='35731'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='65' h='8903' id='73' is-fixed='true' name='current_yearly' show-title='false' w='9867' x='83999' y='35731'>
+                  <layout-cache fixed-size-h='65' fixed-size-w='140' type-h='fixed' type-w='fixed' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='32' h='4878' id='58' is-fixed='true' name='monthly_growth' show-title='false' w='7200' x='17333' y='44634'>
+                  <layout-cache fixed-size-h='32' fixed-size-w='100' type-h='fixed' type-w='fixed' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='32' h='4878' id='69' is-fixed='true' name='quarterly_growth' show-title='false' w='7200' x='50666' y='44634'>
+                  <layout-cache fixed-size-h='32' fixed-size-w='100' type-h='fixed' type-w='fixed' />
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='32' h='4878' id='74' is-fixed='true' name='yearly_growth' show-title='false' w='9867' x='83999' y='44634'>
+                  <layout-cache fixed-size-h='32' fixed-size-w='120' type-h='fixed' type-w='fixed' />
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -13339,7 +13747,14 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
       <simple-id uuid='{DB88AB14-AB9C-437A-9471-BABD9C3C09D5}' />
     </window>
     <window class='dashboard' maximized='true' name='Dashboard Home'>
-      <viewpoints />
+      <viewpoints>
+        <viewpoint name='current_monthly' />
+        <viewpoint name='current_quarterly' />
+        <viewpoint name='current_yearly' />
+        <viewpoint name='monthly_growth' />
+        <viewpoint name='quarterly_growth' />
+        <viewpoint name='yearly_growth' />
+      </viewpoints>
       <active id='5' />
       <simple-id uuid='{9735C775-0A54-4339-BC6C-5287695BFFAD}' />
     </window>
@@ -15869,78 +16284,163 @@ ORDER BY session_date DESC, status, count_visitors DESC, channel</relation>
     </thumbnail>
     <thumbnail height='192' name='Dashboard Home' width='192'>
       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
-      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
+      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
     </thumbnail>
     <thumbnail height='192' name='Free' width='192'>
       iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
